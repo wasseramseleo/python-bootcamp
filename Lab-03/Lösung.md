@@ -213,7 +213,7 @@ from utils import CodeTimer  # 1. Bonus-Import
 import os
 
 # --- Setup (Alte Logs löschen) ---
-acc1_id = "DE001"
+acc1_id = "AT001"
 if os.path.exists(f"log_account_{acc1_id}.txt"):
     os.remove(f"log_account_{acc1_id}.txt")
 

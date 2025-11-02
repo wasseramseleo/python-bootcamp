@@ -3,9 +3,9 @@ from account_bonus import Account
 print("Teste Bonus-Herausforderung...")
 
 # Test von __eq__
-acc1 = Account("AT100", "Ina Invest", 1000.0)
-acc2 = Account("AT100", "Ina Invest", 1000.0) # Selbe Kontonummer
-acc3 = Account("AT200", "Berta Bank", 500.0)
+acc1 = Account("DE100", "Ina Invest", 1000.0)
+acc2 = Account("DE100", "Ina Invest", 1000.0) # Selbe Kontonummer
+acc3 = Account("DE200", "Berta Bank", 500.0)
 
 print(f"acc1 == acc2: {acc1 == acc2}") # Erwartet: True
 print(f"acc1 == acc3: {acc1 == acc3}") # Erwartet: False

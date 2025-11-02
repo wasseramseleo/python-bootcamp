@@ -65,7 +65,7 @@ def perform_transaction_robust(account: Account, action: str, amount: float):
 
 # --- Test-Szenarien ---
 print("--- Starte Bonus-Tests ---")
-acc1 = Account("DE001", "Max Mustermann", 500.0)
+acc1 = Account("AT001", "Max Mustermann", 500.0)
 
 # Szenario 1: Erfolg (trifft 'else' und 'finally')
 perform_transaction_robust(acc1, "withdraw", 100.0)  # Saldo: 400

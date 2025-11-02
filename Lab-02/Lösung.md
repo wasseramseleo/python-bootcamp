@@ -69,7 +69,7 @@ from account import Account # Optional für Vergleich
 
 # 1. Test der Basisklasse (wie in Lab 1)
 print("--- Test Basis-Account ---")
-acc_base = Account("DE001", "Basis Kunde", 100.0)
+acc_base = Account("AT001", "Basis Kunde", 100.0)
 acc_base.withdraw(50.0)
 print(acc_base)
 
@@ -79,7 +79,7 @@ print("\n--- Test SavingsAccount ---")
 # Erstellen eines SavingsAccount-Objekts
 # Beachten Sie das zusätzliche Argument 'interest_rate'
 sa1 = SavingsAccount(
-    account_number="DE100", 
+    account_number="AT100", 
     account_holder="Ina Sparfuchs", 
     initial_balance=1000.0,
     interest_rate=0.05  # 5% Zinsen
@@ -192,7 +192,7 @@ from special_accounts import SavingsAccount, CheckingAccount
 print("\n--- Test CheckingAccount (Bonus) ---")
 
 ca1 = CheckingAccount(
-    account_number="DE200",
+    account_number="AT200",
     account_holder="Gabi Giro",
     initial_balance=100.0,
     overdraft_limit=500.0

@@ -47,7 +47,7 @@ Modifizieren Sie Ihre bestehende `Account`-Klasse in `account.py`.
       * Passen Sie Ihre `main.py` an. Erstellen Sie ein oder zwei `Account`-Objekte.
       * Führen Sie mehrere erfolgreiche und eine fehlgeschlagene Transaktion durch.
       * Führen Sie das Skript aus.
-      * Überprüfen Sie Ihr Projektverzeichnis: Sie sollten neue Dateien sehen (z.B. `log_account_DE001.txt`). Öffnen Sie diese und prüfen Sie, ob alle Transaktionen mit Zeitstempel protokolliert wurden.
+      * Überprüfen Sie Ihr Projektverzeichnis: Sie sollten neue Dateien sehen (z.B. `log_account_AT001.txt`). Öffnen Sie diese und prüfen Sie, ob alle Transaktionen mit Zeitstempel protokolliert wurden.
 
 #### Bonus-Herausforderung: Ein eigener Context Manager (`CodeTimer`)
 

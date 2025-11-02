@@ -2,8 +2,8 @@ from account import Account
 import os # Nützlich, um alte Logs zu löschen
 
 # 5. Testen
-acc1_id = "DE001"
-acc2_id = "DE002"
+acc1_id = "AT001"
+acc2_id = "AT002"
 
 # Alte Log-Dateien löschen für einen sauberen Test
 if os.path.exists(f"log_account_{acc1_id}.txt"):

@@ -90,8 +90,8 @@ from account import Account
 
 # 1. Objekte erstellen (Instanziierung)
 print("Erstelle Konten...")
-acc1 = Account(account_number="AT001", account_holder="Max Mustermann", initial_balance=500.0)
-acc2 = Account(account_number="AT002", account_holder="Erika Musterfrau") # nutzt initial_balance=0.0
+acc1 = Account(account_number="DE001", account_holder="Max Mustermann", initial_balance=500.0)
+acc2 = Account(account_number="DE002", account_holder="Erika Musterfrau") # nutzt initial_balance=0.0
 
 # 2. Objekte mit print() testen (ruft __str__ auf)
 print(acc1)
@@ -202,9 +202,9 @@ from account_bonus import Account
 print("Teste Bonus-Herausforderung...")
 
 # Test von __eq__
-acc1 = Account("AT100", "Ina Invest", 1000.0)
-acc2 = Account("AT100", "Ina Invest", 1000.0) # Selbe Kontonummer
-acc3 = Account("AT200", "Berta Bank", 500.0)
+acc1 = Account("DE100", "Ina Invest", 1000.0)
+acc2 = Account("DE100", "Ina Invest", 1000.0) # Selbe Kontonummer
+acc3 = Account("DE200", "Berta Bank", 500.0)
 
 print(f"acc1 == acc2: {acc1 == acc2}") # Erwartet: True
 print(f"acc1 == acc3: {acc1 == acc3}") # Erwartet: False

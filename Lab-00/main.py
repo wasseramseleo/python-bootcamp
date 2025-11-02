@@ -2,8 +2,8 @@ from account import Account
 
 # 1. Objekte erstellen (Instanziierung)
 print("Erstelle Konten...")
-acc1 = Account(account_number="AT001", account_holder="Max Mustermann", initial_balance=500.0)
-acc2 = Account(account_number="AT002", account_holder="Erika Musterfrau") # nutzt initial_balance=0.0
+acc1 = Account(account_number="DE001", account_holder="Max Mustermann", initial_balance=500.0)
+acc2 = Account(account_number="DE002", account_holder="Erika Musterfrau") # nutzt initial_balance=0.0
 
 # 2. Objekte mit print() testen (ruft __str__ auf)
 print(acc1)
