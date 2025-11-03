@@ -41,7 +41,7 @@ class InsufficientFundsError(BankingError):
 
 ```
 
-#### Datei: `account.py` (Refaktorierte Version von Lab 1 oder 3)
+#### Datei: `account.py` (Version von Lab 1 oder 3)
 
 ```python
 # account.py
@@ -51,7 +51,7 @@ from exceptions import InvalidAmountError, InsufficientFundsError
 
 class Account:
     """
-    Refaktorierte Account-Klasse.
+    Rafactored Account-Klasse.
     Löst Exceptions aus statt 'False' zurückzugeben.
     (Basiert auf der Version von Lab 3 mit Logging)
     """
@@ -73,7 +73,6 @@ class Account:
         except IOError as e:
             print(f"WARNUNG: Logging fehlgeschlagen: {e}")
 
-    # --- Refaktorierte Methoden ---
 
     def deposit(self, amount: float):
         """

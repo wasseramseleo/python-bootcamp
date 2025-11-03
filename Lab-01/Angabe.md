@@ -1,6 +1,6 @@
 ## Lab 1: Klassen & Objekte – Das Bankkonto
 
-Willkommen zum ersten Lab\! In dieser Übung legen wir das Fundament für unsere Banking-App. Wir definieren die Kern-Datenstruktur, mit der wir in den kommenden Tagen arbeiten werden: das `Account` (Konto).
+Willkommen zum ersten Lab! In dieser Übung legen wir das Fundament für unsere Banking-App. Wir definieren die Kern-Datenstruktur, mit der wir in den kommenden Tagen arbeiten werden: das `Account` (Konto).
 
 ### Lernziele
 

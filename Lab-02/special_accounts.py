@@ -1,3 +1,5 @@
+from account import Account
+
 class SavingsAccount(Account):
   """
   Ein Sparkonto, das von Account erbt.
@@ -36,47 +38,47 @@ class SavingsAccount(Account):
     else:
       print("Keine Zinsen angerechnet (Guthaben zu gering).")
 
-  class CheckingAccount(Account):
+class CheckingAccount(Account):
+  """
+  Ein Girokonto, das von Account erbt.
+  Erweitert 'withdraw' um einen Überziehungskredit (Dispo).
+  """
+
+  def __init__(self, account_number: str, account_holder: str,
+               initial_balance: float = 0.0, overdraft_limit: float = 500.0):
     """
-    Ein Girokonto, das von Account erbt.
-    Erweitert 'withdraw' um einen Überziehungskredit (Dispo).
+    Initialisiert das Girokonto.
+
+    Args:
+        overdraft_limit (float): Der Überziehungsrahmen (Dispo).
     """
+    # 1. Aufruf des Basis-Konstruktors
+    super().__init__(account_number, account_holder, initial_balance)
 
-    def __init__(self, account_number: str, account_holder: str,
-                 initial_balance: float = 0.0, overdraft_limit: float = 500.0):
-      """
-      Initialisiert das Girokonto.
+    # 1. Speichern des neuen Attributs
+    self._overdraft_limit = overdraft_limit
+    print(f"Girokonto {self.account_number} mit {self._overdraft_limit:.2f} EUR Dispo erstellt.")
 
-      Args:
-          overdraft_limit (float): Der Überziehungsrahmen (Dispo).
-      """
-      # 1. Aufruf des Basis-Konstruktors
-      super().__init__(account_number, account_holder, initial_balance)
+  # 2. Überschreiben (Override) der 'withdraw' Methode
+  def withdraw(self, amount: float) -> bool:
+    """
+    Hebt einen Betrag vom Konto ab.
+    Berücksichtigt den Überziehungskredit (Dispo).
+    """
+    if amount <= 0:
+      print("Abhebungsbetrag muss positiv sein.")
+      return False
 
-      # 1. Speichern des neuen Attributs
-      self._overdraft_limit = overdraft_limit
-      print(f"Girokonto {self.account_number} mit {self._overdraft_limit:.2f} EUR Dispo erstellt.")
+    # 2. Geänderte Logik: Prüft Saldo + Dispo
+    available_funds = self._balance + self._overdraft_limit
 
-    # 2. Überschreiben (Override) der 'withdraw' Methode
-    def withdraw(self, amount: float) -> bool:
-      """
-      Hebt einen Betrag vom Konto ab.
-      Berücksichtigt den Überziehungskredit (Dispo).
-      """
-      if amount <= 0:
-        print("Abhebungsbetrag muss positiv sein.")
-        return False
-
-      # 2. Geänderte Logik: Prüft Saldo + Dispo
-      available_funds = self._balance + self._overdraft_limit
-
-      if available_funds >= amount:
-        # Abhebung ist ok, auch wenn Saldo negativ wird
-        self._balance -= amount
-        print(f"Abhebung von {amount:.2f} EUR erfolgreich.")
-        print(f"Neuer Kontostand: {self._balance:.2f} EUR")
-        return True
-      else:
-        # Nicht mal der Dispo reicht aus
-        print(f"Abhebung fehlgeschlagen. Verfügbares Limit ({available_funds:.2f} EUR) überschritten.")
-        return False
+    if available_funds >= amount:
+      # Abhebung ist ok, auch wenn Saldo negativ wird
+      self._balance -= amount
+      print(f"Abhebung von {amount:.2f} EUR erfolgreich.")
+      print(f"Neuer Kontostand: {self._balance:.2f} EUR")
+      return True
+    else:
+      # Nicht mal der Dispo reicht aus
+      print(f"Abhebung fehlgeschlagen. Verfügbares Limit ({available_funds:.2f} EUR) überschritten.")
+      return False

@@ -1,31 +1,49 @@
 from account import Account
-import os # Nützlich, um alte Logs zu löschen
+from exceptions import InvalidAmountError, InsufficientFundsError, BankingError
 
-# 5. Testen
-acc1_id = "AT001"
-acc2_id = "AT002"
 
-# Alte Log-Dateien löschen für einen sauberen Test
-if os.path.exists(f"log_account_{acc1_id}.txt"):
-    os.remove(f"log_account_{acc1_id}.txt")
-if os.path.exists(f"log_account_{acc2_id}.txt"):
-    os.remove(f"log_account_{acc2_id}.txt")
+def perform_transaction(account: Account, action: str, amount: float):
+  """
+  Führt eine Transaktion aus und fängt bekannte Bank-Fehler ab.
+  """
+  print(f"\nVersuche {action} von {amount:.2f} EUR...")
 
-print("Erstelle Konten und führe Transaktionen durch...")
+  try:
+    # 3. Der 'try'-Block
+    if action == "deposit":
+      account.deposit(amount)
+    elif action == "withdraw":
+      account.withdraw(amount)
+    else:
+      print("Unbekannte Aktion.")
+      return
 
-acc1 = Account(account_number=acc1_id, account_holder="Max Mustermann", initial_balance=500.0)
-acc2 = Account(account_number=acc2_id, account_holder="Erika Musterfrau")
+  # 3. Spezifische 'except'-Blöcke
+  except InvalidAmountError as e:
+    print(f"[FEHLER] Transaktion (ungültiger Betrag) fehlgeschlagen: {e}")
 
-# Transaktionen für acc1
-acc1.deposit(150.50)
-acc1.withdraw(70.0)
-acc1.withdraw(1000.0) # Fehlgeschlagen
+  except InsufficientFundsError as e:
+    print(f"[FEHLER] Transaktion (Guthaben) abgelehnt: {e}")
 
-# Transaktionen für acc2
-acc2.deposit(100.0)
-acc2.withdraw(50.0)
+  except BankingError as e:
+    # Fängt alle anderen Fehler auf, die von BankingError erben
+    print(f"[FEHLER] Allgemeiner Bankfehler: {e}")
 
+
+# --- Test-Szenarien ---
+acc1 = Account("AT001", "Max Mustermann", 500.0)
 print(acc1)
-print(acc2)
-print("\nSkript beendet. Bitte überprüfen Sie die .txt-Log-Dateien.")
-print(f"(z.B. 'log_account_{acc1_id}.txt')")
+
+# Szenario 1: Erfolgreiche Abhebung
+perform_transaction(acc1, "withdraw", 100.0)  # Sollte klappen
+
+# Szenario 2: Fehlgeschlagen (Guthaben)
+perform_transaction(acc1, "withdraw", 1000.0)  # Sollte InsufficientFundsError auslösen
+
+# Szenario 3: Fehlgeschlagen (Betrag)
+perform_transaction(acc1, "deposit", -50.0)  # Sollte InvalidAmountError auslösen
+
+# Szenario 4: Erfolgreiche Einzahlung
+perform_transaction(acc1, "deposit", 200.0)
+
+print(f"\nEndgültiger Saldo: {acc1.get_balance():.2f} EUR")  # Erwartet: 500-100+200 = 600

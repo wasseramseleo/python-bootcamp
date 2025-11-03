@@ -1,71 +1,71 @@
-import datetime  # 1. Importiert
+import datetime
+# 2. Import der neuen Exceptions
+from exceptions import InvalidAmountError, InsufficientFundsError
 
 
 class Account:
   """
-  Stellt ein einfaches Bankkonto dar.
-  (Version von Lab 1, erweitert um Logging)
+  Rafactored Account-Klasse.
+  Löst Exceptions aus statt 'False' zurückzugeben.
+  (Basiert auf der Version von Lab 3 mit Logging)
   """
 
   def __init__(self, account_number: str, account_holder: str, initial_balance: float = 0.0):
     self.account_number = account_number
     self.account_holder = account_holder
     self._balance = initial_balance
-
-    # 2. Neues Attribut für den Log-Dateipfad
     self.log_file_path = f"log_account_{self.account_number}.txt"
-
-    # Initial-Log beim Erstellen des Kontos
     self._log_transaction(f"Konto erstellt mit Startsaldo: {initial_balance:.2f} EUR")
 
-  # 3. Neue "protected" Logging-Methode
   def _log_transaction(self, message: str):
-    """
-    Schreibt eine Nachricht mit Zeitstempel in die Log-Datei des Kontos.
-    Verwendet einen Context Manager (with).
-    """
-    # Zeitstempel im ISO-Format (z.B. '2025-11-03T14:30:05.123456')
+    """Schreibt eine Nachricht mit Zeitstempel in die Log-Datei."""
     timestamp = datetime.datetime.now().isoformat()
     log_entry = f"[{timestamp}] {message}\n"
-
     try:
-      # 'with' stellt sicher, dass file.close() automatisch aufgerufen wird.
-      # 'a' = append (anhängen), 'utf-8' für korrekte Zeichenkodierung
       with open(self.log_file_path, mode="a", encoding="utf-8") as f:
         f.write(log_entry)
     except IOError as e:
-      # Fallback, falls das Logging fehlschlägt (z.B. keine Schreibrechte)
-      print(f"WARNUNG: Logging in {self.log_file_path} fehlgeschlagen: {e}")
+      print(f"WARNUNG: Logging fehlgeschlagen: {e}")
 
-  def deposit(self, amount: float) -> bool:
-    if amount > 0:
-      self._balance += amount
-      print(f"Einzahlung von {amount:.2f} EUR erfolgreich.")
-      # 4. Logging integrieren
-      self._log_transaction(f"Einzahlung: +{amount:.2f} EUR. Neuer Saldo: {self._balance:.2f} EUR")
-      return True
-    else:
-      print("Einzahlungsbetrag muss positiv sein.")
-      self._log_transaction(f"Einzahlung fehlgeschlagen (Betrag: {amount:.2f} EUR)")
-      return False
-
-  def withdraw(self, amount: float) -> bool:
+  def deposit(self, amount: float):
+    """
+    Zahlt einen Betrag ein.
+    Löst InvalidAmountError bei ungültigem Betrag aus.
+    """
+    # 2. Validierung und 'raise'
     if amount <= 0:
-      print("Abhebungsbetrag muss positiv sein.")
-      self._log_transaction(f"Abhebung fehlgeschlagen (Betrag: {amount:.2f} EUR)")
-      return False
+      msg = f"Einzahlung fehlgeschlagen: Betrag ({amount:.2f} EUR) muss positiv sein."
+      self._log_transaction(msg)
+      raise InvalidAmountError(msg)
 
-    if self._balance >= amount:
-      self._balance -= amount
-      print(f"Abhebung von {amount:.2f} EUR erfolgreich.")
-      # 4. Logging integrieren
-      self._log_transaction(f"Abhebung: -{amount:.2f} EUR. Neuer Saldo: {self._balance:.2f} EUR")
-      return True
-    else:
-      print(f"Abhebung fehlgeschlagen. Nicht genügend Guthaben.")
-      # 4. Logging integrieren
-      self._log_transaction(f"Abhebung fehlgeschlagen (Guthaben: {self._balance:.2f} EUR, Betrag: {amount:.2f} EUR)")
-      return False
+    # Normale Logik
+    self._balance += amount
+    print(f"Einzahlung von {amount:.2f} EUR erfolgreich.")
+    self._log_transaction(f"Einzahlung: +{amount:.2f} EUR. Neuer Saldo: {self._balance:.2f} EUR")
+    # Kein 'return True' mehr nötig
+
+  def withdraw(self, amount: float):
+    """
+    Hebt einen Betrag ab.
+    Löst InvalidAmountError oder InsufficientFundsError aus.
+    """
+    # 2. Validierung 1
+    if amount <= 0:
+      msg = f"Abhebung fehlgeschlagen: Betrag ({amount:.2f} EUR) muss positiv sein."
+      self._log_transaction(msg)
+      raise InvalidAmountError(msg)
+
+    # 2. Validierung 2
+    if self._balance < amount:
+      msg = f"Abhebung fehlgeschlagen. Guthaben nicht ausreichend. Benötigt: {amount:.2f} EUR, Verfügbar: {self._balance:.2f} EUR"
+      self._log_transaction(msg)
+      raise InsufficientFundsError(msg)
+
+    # Normale Logik
+    self._balance -= amount
+    print(f"Abhebung von {amount:.2f} EUR erfolgreich.")
+    self._log_transaction(f"Abhebung: -{amount:.2f} EUR. Neuer Saldo: {self._balance:.2f} EUR")
+    # Kein 'return True' mehr nötig
 
   def get_balance(self) -> float:
     return self._balance

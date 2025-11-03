@@ -20,7 +20,9 @@ print("\nStarte Batch-Einzahlungstest...")
 # Wir messen, wie lange 1000 Einzahlungen dauern
 # (Logging in eine Datei kann die Ausführung verlangsamen!)
 with CodeTimer(name="1000x Einzahlungen"):
+    # self.__enter__()
     for i in range(1000):
         acc1.deposit(1.0)
+    # self.__exit__()
 
 print(f"Test beendet. Aktueller Saldo: {acc1.get_balance():.2f} EUR")

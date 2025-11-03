@@ -4,7 +4,7 @@ class Account:
   und Abhebungen mit Saldenprüfung verwaltet.
   """
 
-  def __init__(self, account_number: str, account_holder: str, initial_balance: float = 0.0):
+  def __init__(self, account_number: str, account_holder: str, initial_balance: float = 0.0, is_savings: bool = False, is_giro: bool = True):
     """
     Initialisiert ein neues Konto.
 
@@ -18,6 +18,8 @@ class Account:
     # 'Protected' Attribut: Konvention signalisiert,
     # dass dies nicht von außen direkt manipuliert werden sollte.
     self._balance = initial_balance
+    self.is_savings = is_savings
+    self.is_giro = is_giro
 
   def deposit(self, amount: float) -> bool:
     """
@@ -37,7 +39,7 @@ class Account:
     Hebt einen Betrag vom Konto ab.
     Prüft auf positiven Betrag und ausreichende Deckung.
     """
-    if amount <= 0:
+    if amount <= 0 and not self.is_giro:
       print("Abhebungsbetrag muss positiv sein.")
       return False
 

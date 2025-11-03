@@ -1,5 +1,3 @@
-`Lab_04_Instructions.md`
-
 ## Lab 4: Exceptions – Robuste Transaktionsverarbeitung
 
 In unseren bisherigen Labs haben die Methoden `deposit` und `withdraw` bei Fehlern (z.B. mangelnde Deckung) `False` zurückgegeben oder einfach eine Nachricht gedruckt. In großen Anwendungen ist dies unzureichend.
@@ -25,7 +23,7 @@ Wir müssen die Transaktionslogik unserer Bank-App "produktionsreif" machen.
 
 -----
 
-### Kernaufgabe: Von Fehler-Codes zu Exceptions
+### Angabe: Von Fehler-Codes zu Exceptions
 
 1.  **Datei `exceptions.py` erstellen:**
 
@@ -47,7 +45,7 @@ Wir müssen die Transaktionslogik unserer Bank-App "produktionsreif" machen.
             pass
         ```
 
-2.  **`account.py` refaktorisieren:**
+2.  **`account.py` refactoring:**
 
       * Öffnen Sie Ihre `account.py` (idealerweise die Version mit Logging aus Lab 3, die Version aus Lab 1 funktioniert aber auch).
       * Importieren Sie Ihre neuen Exceptions: `from exceptions import InvalidAmountError, InsufficientFundsError`.
@@ -77,7 +75,7 @@ Wir müssen die Transaktionslogik unserer Bank-App "produktionsreif" machen.
       * **`else`:** Fügen Sie einen `else`-Block hinzu. Dieser wird *nur* ausgeführt, wenn *keine* Exception aufgetreten ist. Geben Sie hier eine Erfolgsmeldung aus (z.B. `print(f"Transaktion erfolgreich verbucht. Neuer Saldo: {account.get_balance():.2f} EUR")`).
       * **`finally`:** Fügen Sie einen `finally`-Block hinzu. Dieser wird *immer* ausgeführt. Geben Sie hier eine "Aufräum-"Nachricht aus (z.B. `print("--- Transaktionsverarbeitung beendet ---")`).
 
-2.  **Exception Chaining (模拟):**
+2.  **Exception Chaining:**
 
       * Stellen Sie sich vor, *vor* jeder Abhebung muss ein externer Betrugsprüfungs-Dienst (Fraud-Service) kontaktiert werden. Dieser Dienst kann `ConnectionError` oder `TimeoutError` werfen.
       * **`exceptions.py`:** Fügen Sie eine neue Exception hinzu: `class FraudServiceError(BankingError): pass`
