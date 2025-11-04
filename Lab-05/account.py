@@ -34,7 +34,7 @@ class AccountHistoryIterator:
 
   def __init__(self, transactions: list):
     self._transactions = transactions
-    self._index = 0  # Zustand (Wo bin ich?)
+    self._index = 0
 
   def __iter__(self):
     """Iteratoren geben sich selbst zurück."""

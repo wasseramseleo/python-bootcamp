@@ -1,23 +1,8 @@
 import os
 from lazy_transaction_reader import LazyTransactionReader
 
-# --- Setup: Erstellen einer Dummy-Logdatei ---
-log_filename = "test_tx.log"
-dummy_data = """
-DEPOSIT: 1000.50
-WITHDRAW: 50.00
-WITHDRAW: 120.25
-DEPOSIT: 300.00
-SYSTEM:FEE: 5.00
-WITHDRAW: 80.00
-"""
 
-try:
-  with open(log_filename, "w") as f:
-    f.write(dummy_data.strip())
-except IOError as e:
-  print(f"Setup fehlgeschlagen: {e}")
-  # Beenden, wenn wir die Datei nicht schreiben können
+log_filename = "test_tx.log"
 
 # --- Beispiel-Nutzung (Bonus) ---
 print("\n--- Bonus-Herausforderung Test 1 (alle Transaktionen) ---")

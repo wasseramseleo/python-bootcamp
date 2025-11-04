@@ -40,8 +40,6 @@ class LazyTransactionReader:
       if self.filter_keyword.upper() in line.upper():
         return line  # Match gefunden!
 
-      # Kein Match & Filter ist an -> weiter zur nächsten Zeile (while True)
-      # print(f"DEBUG: Überspringe Zeile: {line}")
 
   def close(self):
     """Schließt das Dateihandle, falls offen."""
