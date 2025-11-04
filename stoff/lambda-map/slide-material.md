@@ -37,7 +37,7 @@ Titel: `map(function, iterable)`
 Zweck: Wendet eine Funktion auf *jedes* Element eines Iterables an.
 
 Konzept (1:1 Transformation):
-`[x, y, z]` -\> `[f(x), f(y), f(z)]`
+`[x, y, z]` -> `[f(x), f(y), f(z)]`
 
 Beispiel: Alle Zahlen in einer Liste verdoppeln.
 
@@ -47,7 +47,7 @@ numbers = [1, 2, 3, 4]
 # Nutzung mit lambda
 doubled_iterator = map(lambda x: x * 2, numbers)
 
-# WICHTIG (Evidence): map() ist "lazy"
+# WICHTIG: map() ist "lazy"
 print(doubled_iterator)
 # Output: <map object at 0x...>
 
@@ -78,7 +78,7 @@ numbers = [1, 2, 3, 4, 5, 6]
 # Die lambda-Funktion ist das Prädikat (Bedingung)
 even_iterator = filter(lambda x: x % 2 == 0, numbers)
 
-# WICHTIG (Evidence): filter() ist ebenfalls "lazy"
+# WICHTIG: filter() ist ebenfalls "lazy"
 print(even_iterator)
 # Output: <filter object at 0x...>
 
@@ -116,7 +116,7 @@ even = list(filter(lambda x: x % 2 == 0, numbers))
 even_comp = [x for x in numbers if x % 2 == 0]
 ```
 
-Kritische Anmerkung (Evidence): List Comprehensions sind meistens der bevorzugte ("Pythonic") Weg. Sie sind deklarativer und oft schneller, da der Overhead der `lambda`-Aufrufe entfällt.
+Kritische Anmerkung: List Comprehensions sind meistens der bevorzugte ("Pythonic") Weg. Sie sind deklarativer und oft schneller, da der Overhead der `lambda`-Aufrufe entfällt.
 
 -----
 
@@ -126,7 +126,7 @@ Titel: `functools.reduce(function, iterable)`
 
 Zweck: Reduziert (aggregiert) ein Iterable auf einen einzigen Wert durch wiederholte Anwendung einer Funktion.
 
-WICHTIG: `reduce` ist nicht mehr "built-in". Es muss importiert werden\!
+WICHTIG: `reduce` ist nicht mehr "built-in". Es muss importiert werden!
 
 ```python
 from functools import reduce
@@ -163,9 +163,9 @@ Titel: Wann (und wann nicht) `reduce()`?
 
 `reduce` ist extrem mächtig, aber oft schwer zu lesen und "un-pythonisch".
 
-Kritik (Evidence): Guido van Rossum (Pythons Erfinder) hat `reduce` absichtlich aus den Built-ins in `functools` verschoben, um den Gebrauch einzudämmen.
+Kritik: Guido van Rossum (Pythons Erfinder) hat `reduce` absichtlich aus den Built-ins in `functools` verschoben, um den Gebrauch einzudämmen.
 
-Regel 1: Verwende `reduce` NICHT für einfache Operationen\!
+Regel 1: Verwende `reduce` NICHT für einfache Operationen!
 
 ```python
 # SCHLECHT (schwer lesbar)

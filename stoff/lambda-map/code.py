@@ -1,10 +1,58 @@
-# Datei-Handler in Python sind Iteratoren
-with open("massive_log_file.log", "r") as f:
-  # 'f' ist ein Iterator.
-  # 'f.readline()' (oder __next__) wird bei jedem Schleifendurchlauf aufgerufen.
+numbers = [1, 2, 3, 4]
 
-  for line in f:
-    # Es ist immer nur EINE Zeile gleichzeitig im Speicher!
-    process(line)
+# map
+doubled = list(map(lambda x: x * 2, numbers))
 
-# Ergebnis: Verarbeitung einer 100 GB Datei mit < 1 MB RAM.
+# List Comprehension
+doubled_comp = [x * 2 for x in numbers]
+
+# filter
+even = list(filter(lambda x: x % 2 == 0, numbers))
+
+# List Comprehension
+even_comp = [x for x in numbers if x % 2 == 0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def add(a, b):
+  c = a + 1
+  d = b + 1
+  return c + d
+
+
+summe = lambda x, y: add(x, y) + 1
+
+
+# Das Ergebnis ist der Rückgabewert des Funktionsaufrufs
+print(summe(10, 5))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

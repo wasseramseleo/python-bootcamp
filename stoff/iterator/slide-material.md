@@ -186,4 +186,4 @@ for num in fibo_seq:
   * **Iterable (z.B. `list`):** Kann einen Iterator bereitstellen (via `iter()`).
   * **Iterator:** Das "laufende" Objekt, das sich den Zustand merkt und sich erschöpft.
   * **`for`-Loop:** Ist syntaktischer Zucker für das `iter()`/`next()`-Protokoll.
-  * **Hauptvorteil (Evidence):** Drastisch reduzierter Speicherverbrauch (RAM). Ermöglicht die Verarbeitung von Streams oder unendlichen Sequenzen.
+  * **Hauptvorteil:** Drastisch reduzierter Speicherverbrauch (RAM). Ermöglicht die Verarbeitung von Streams oder unendlichen Sequenzen.

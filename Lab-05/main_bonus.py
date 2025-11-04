@@ -1,4 +1,3 @@
-import os
 from lazy_transaction_reader import LazyTransactionReader
 
 
@@ -11,6 +10,7 @@ try:
   all_tx_reader = LazyTransactionReader(log_filename)
   for line in all_tx_reader:
     print(f"  Gelesene Zeile: {line}")
+    all_tx_reader.close()
   # Beachte: Die Datei sollte jetzt automatisch geschlossen sein.
 
 except FileNotFoundError:
@@ -33,6 +33,3 @@ try:
 except FileNotFoundError:
   pass
 
-# Aufräumen
-if os.path.exists(log_filename):
-  os.remove(log_filename)
