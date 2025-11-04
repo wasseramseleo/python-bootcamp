@@ -24,6 +24,7 @@ def require_role(required_role: str):
 
       # 3. Wrapper-Logik (simulierte Prüfung)
       # Wir erwarten 'user_role' als Keyword-Argument
+      print(args)
       user_role = kwargs.get('user_role', 'guest')
 
       if user_role == required_role:

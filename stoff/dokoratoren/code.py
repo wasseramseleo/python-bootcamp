@@ -96,3 +96,12 @@ def timer_decorator(func_to_wrap):
     return result  # 5. Rückgabewert zurückgeben
 
   return wrapper_function
+
+
+@timer_decorator
+def process_data():
+    """Das ist der Docstring für process_data."""
+    pass
+
+print(process_data.__name__)
+print(process_data.__doc__)

@@ -5,7 +5,7 @@ print("\n--- Bonus-Herausforderung Test ---")
 
 # Test 1: Admin-Funktion als Admin (sollte klappen)
 try:
-  delete_account("AT12345", user_role='admin')
+  delete_account("AT12345",'admin')
 except PermissionError as e:
   print(f"Fehler: {e}")
 
