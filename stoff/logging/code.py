@@ -1,64 +1,76 @@
-def get_user_data(user_id):
-  # ... komplexe Logik ...
-  if user_id == 0:
-    return None  # Gibt 'None' zurück
+import logging
 
-  return {"name": "Alice", "id": user_id}  # Gibt 'dict' zurück
+# 1. Hole einen Logger, der nach dem Modul benannt ist
+# (z.B. "my_package.utils")
+log = logging.getLogger(__name__)
 
+def do_something(data):
+    # 2. Logge über die Instanz, nicht global
+    log.info(f"Führe etwas aus mit {data}")
+    if not data:
+        log.warning("Keine Daten übergeben!")
 
-# Was ist 'user' hier? Ein dict? Oder None?
-user = get_user_data(request.id)
+# Falsch
+try:
+    result = 10 / 0
+except ZeroDivisionError as e:
+    # PROBLEM: Man sieht nur die Nachricht, nicht WO der Fehler war.
+    # Der Stack Trace fehlt!
+    log.error(f"Ein Fehler ist aufgetreten: {e}")
 
-# Dieser Code stürzt AB, wenn user_id == 0 ist
-print(user["name"])
-# AttributeError: 'NoneType' object is not subscriptable
+# Richtig
+try:
+    result = 10 / 0
+except ZeroDivisionError as e:
+    # 1. log.exception() (bevorzugt, da kürzer)
+    # Loggt auf ERROR-Level und hängt automatisch den Stack Trace an
+    log.exception("Divisions-Fehler bei der Berechnung.")
 
-
-
-
-
-# Wir brauchen 'Optional' aus dem 'typing'-Modul
-from typing import Optional
-
-
-def get_user_data(user_id: int) -> Optional[dict]:
-  """Holt User-Daten. Kann None zurückgeben, wenn nicht gefunden."""
-
-  if user_id == 0:
-    return None  # Erwartet (gemäß 'Optional')
-
-  return {"name": "Alice", "id": user_id}  # Erwartet (gemäß 'dict')
-
-
-# IDEs und Tools verstehen das jetzt
-user = get_user_data(0)
-
-# print(user["name"]) # <-- IDE/Tool warnt uns hier!
+    # 2. Alternative (flexibleres Level)
+    log.warning("Divisions-Fehler", exc_info=True)
 
 
-def add(a: int, b: int) -> int:
-  """Diese Funktion erwartet 'int'."""
-  return a + b
+from logging.config import dictConfig
+
+LOGGING_CONFIG = {
+    'version': 1,
+    'formatters': {
+        'default': {
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        },
+    },
+    'handlers': {
+        'console': { # Ein Handler namens 'console'
+            'class': 'logging.StreamHandler',
+            'formatter': 'default',
+        },
+    },
+    'loggers': {
+        'my_package': { # Alle Logger in 'my_package'
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        },
+        'requests': { # Logger von Drittanbietern
+            'level': 'WARNING', # (requests soll "leise" sein)
+            'handlers': ['console'],
+        },
+    },
+}
+
+dictConfig(LOGGING_CONFIG) # Einmal anwenden
 
 
-# --- KEIN FEHLER! ---
-# Dieser Code läuft (leider) problemlos durch,
-# obwohl er die Annotationen verletzt.
-result = add("Hallo ", "Welt")
+# Verwendung einer Library wie 'python-json-logger'
+import logging
+from pythonjsonlogger import jsonlogger
 
-print(result)
-# Output: Hallo Welt
+# ... (Handler konfigurieren, um jsonlogger.JsonFormatter zu nutzen) ...
 
+# Code
+log = logging.getLogger("app.users")
+log.error("Login fehlgeschlagen", extra={
+    "user_id": 123,
+    "login_attempt": 5,
+    "ip_address": "192.168.1.10"
+})
 
-# 'list' und 'dict' direkt verwenden
-def process_data(data: list[str]) -> dict[str, int]:
-    ...
-    return {"count": len(data)}
-
-
-from typing import List, Dict
-
-# 'List' und 'Dict' (Großbuchstabe) aus typing
-def process_data(data: List[str]) -> Dict[str, int]:
-    ...
-    return {"count": len(data)}

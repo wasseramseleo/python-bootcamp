@@ -224,3 +224,5 @@ sales_count = df.groupby(['City', 'Category'])['SalesID'].count()
       * Zeilen: `.loc` (Label) oder `.iloc` (Position).
   * **Filtern (Evidenz):** Boolean Indexing (Masking) ist der Standard (`df[df['age'] > 30]`).
   * **Analyse (Kern):** `groupby()` (Split-Apply-Combine) ist das mächtigste Werkzeug zur Aggregation von Daten.
+
+

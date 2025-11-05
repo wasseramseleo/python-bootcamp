@@ -1,7 +1,3 @@
-Hier sind die Inhalte für die Slides zum Thema Unit-Testing mit `pytest`.
-
------
-
 ## Folie 1: Titel
 
 **Titel:** Unit-Tests mit `pytest`
@@ -33,12 +29,12 @@ Jede Zeile Code, die Sie schreiben, ist eine potenzielle Fehlerquelle ("Liabilit
 
 `unittest` ist in Python eingebaut, aber `pytest` ist der De-facto-Standard in der Industrie.
 
-| Feature | `unittest` (Standard-Bibliothek) | `pytest` (Third-Party) |
-| :--- | :--- | :--- |
-| **Boilerplate** | **Hoch.** Man muss von `TestCase` erben. | **Keins.** Einfache `test_...` Funktionen. |
-| **Asserts** | Umständlich (`self.assertEqual(a, b)`) | Nativ (`assert a == b`) |
-| **Fehlermeldung** | Limitiert (`AssertionError: X != Y`) | **Überlegen.** Zeigt *genau*, was ungleich ist ("Magic Asserts"). |
-| **Setup/Cleanup** | `setUp()`, `tearDown()` Methoden | **Fixtures** (Flexibler, wiederverwendbar) |
+| Feature           | `unittest` (Standard-Bibliothek)         | `pytest` (Third-Party)                                            |
+|:------------------|:-----------------------------------------|:------------------------------------------------------------------|
+| **Boilerplate**   | **Hoch.** Man muss von `TestCase` erben. | **Keins.** Einfache `test_...` Funktionen.                        |
+| **Asserts**       | Umständlich (`self.assertEqual(a, b)`)   | Nativ (`assert a == b`)                                           |
+| **Fehlermeldung** | Limitiert (`AssertionError: X != Y`)     | **Überlegen.** Zeigt *genau*, was ungleich ist ("Magic Asserts"). |
+| **Setup/Cleanup** | `setUp()`, `tearDown()` Methoden         | **Fixtures** (Flexibler, wiederverwendbar)                        |
 
 **Evidenz (Beispiel):**
 

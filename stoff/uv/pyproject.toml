@@ -1,0 +1,21 @@
+[project]
+name = "my_app"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+# 1. Haupt-Abhängigkeiten (ersetzt requirements.txt)
+dependencies = [
+    "fastapi>=0.100.0",
+    "sqlalchemy[asyncio]",
+]
+
+# 2. Optionale Abhängigkeiten (für dev, test, etc.)
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-mock",
+]
+dev = [
+    "mypy",
+    "ruff",
+]

@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-11-03...",
+  "level": "ERROR",
+  "name": "app.users",
+  "message": "Login fehlgeschlagen",
+  "user_id": 123,
+  "login_attempt": 5,
+  "ip_address": "192.168.1.10"
+}

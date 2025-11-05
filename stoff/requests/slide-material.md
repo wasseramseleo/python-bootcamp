@@ -79,6 +79,7 @@ Um Daten an einen Server zu senden (z.B. ein Formular ausfüllen, einen neuen Us
 (Sendet als `application/x-www-form-urlencoded`)
 
 ```python
+# Sendet als application/x-www-form-urlencoded
 payload = {'username': 'alice', 'pass': '123'}
 r = requests.post("https://httpbin.org/post", data=payload)
 ```
@@ -87,6 +88,7 @@ r = requests.post("https://httpbin.org/post", data=payload)
 (Setzt den `Content-Type: application/json` Header automatisch)
 
 ```python
+# Setzt den `Content-Type: application/json` Header automatisch
 payload = {'username': 'alice', 'role': 'admin'}
 r = requests.post("https://api.example.com/users", json=payload)
 
