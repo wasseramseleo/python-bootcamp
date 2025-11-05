@@ -75,14 +75,14 @@ def test_withdraw_fraud_alert(basic_account, mocker):
   wenn der Fraud-Service 'hohes Risiko' (0.9) meldet.
   """
   # Arrange (Mock): Ersetze den API-Aufruf, return_value=0.9
-  mocker.patch(
-    'external_services.check_risk',
+  mocker = mocker.patch(
+    'account.check_risk',
     return_value=0.9
   )
 
   # Act & Assert
   with pytest.raises(PermissionError, match="Fraud Alert"):
-    basic_account.withdraw(50.0)
+    basic_account.withdraw(50000.0)
 
   # Saldo muss unverändert sein, da die Transaktion blockiert wurde
   assert basic_account.get_balance() == 100.0
@@ -95,8 +95,8 @@ def test_withdraw_fraud_check_pass(basic_account, mocker):
   Prüft auch, ob der Mock korrekt aufgerufen wurde.
   """
   # Arrange (Mock): Ersetze den API-Aufruf, return_value=0.1
-  mock_api = mocker.patch(
-    'external_services.check_risk',
+  mocker = mocker.patch(
+    'account.check_risk',
     return_value=0.1
   )
 
@@ -110,4 +110,4 @@ def test_withdraw_fraud_check_pass(basic_account, mocker):
   # Assert (Mock-Verhalten)
   # Wurde der (gemockte) API-Call genau 1x aufgerufen?
   # ... mit den korrekten Argumenten?
-  mock_api.assert_called_once_with("AT123", 50.0)
+  mocker.assert_called_once_with("AT123", 50.0)
