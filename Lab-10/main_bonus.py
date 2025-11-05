@@ -43,7 +43,7 @@ print("--- Bonus-Herausforderung Test ---")
 
 transactions_batch: list[TransactionDataPrecise] = [
   {'id': 'T1', 'type': 'DEPOSIT', 'amount': 100.0},
-  {'id': 'T2', 'type': 'WITHDRAW', 'amount': 50.0},  # Wird ignoriert
+  {'id': 'T2', 'type': 'WITHDRAW', 'amount': 50.0},
   {'id': 'T3', 'type': 'DEPOSIT', 'amount': 300.0}
 ]
 
@@ -52,7 +52,6 @@ process_batch(transactions_batch, simple_deposit_handler)
 
 
 # --- Was würde mypy fangen? ---
-# (Dieser Code wird nicht ausgeführt, dient nur der Demonstration)
 
 def invalid_handler(tx: TransactionDataPrecise) -> str:
   # Falscher RÜCKGABEWERT (str statt bool)
@@ -65,5 +64,6 @@ def test_mypy():
   # "Callable[[TransactionDataPrecise], str]";
   # expected "Callable[[TransactionDataPrecise], bool]"
   #
-  # process_batch(transactions_batch, invalid_handler)
-  pass
+  process_batch(transactions_batch, invalid_handler)
+
+test_mypy()

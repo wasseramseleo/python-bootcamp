@@ -1,7 +1,7 @@
 """
 Modul: bank_account
 
-Dies ist der Modul-Docstring (Bonus-Aufgabe).
+Dies ist der Modul-Docstring.
 Er enthält die Kerndatenmodelle für die Banking-App,
 insbesondere die BankAccount-Klasse.
 """
@@ -11,7 +11,7 @@ import time
 
 class BankAccount:
   """
-  Repräsentiert ein einzelnes Bankkonto eines Kunden (Bonus-Aufgabe).
+  Repräsentiert ein einzelnes Bankkonto eines Kunden.
 
   Dies ist der Klassen-Docstring. Er erklärt den Zweck der Klasse.
   IDEs wie VS Code zeigen dies als Tooltip an, wenn man über
@@ -25,7 +25,7 @@ class BankAccount:
 
   def __init__(self, owner: str, account_number: str, initial_balance: float = 0.0) -> None:
     """
-    Initialisiert eine neue Instanz eines BankAccount (Angabe 4).
+    Initialisiert eine neue Instanz eines BankAccount.
 
     Args:
         owner (str): Der vollständige Name des Kontoinhabers.
@@ -51,7 +51,7 @@ class BankAccount:
     return False
 
   def withdraw(self, amount: float) -> bool:
-    """Hebt einen Betrag vom Konto ab, falls gedeckt (Angabe 3).
+    """Hebt einen Betrag vom Konto ab, falls gedeckt.
 
     Diese Methode prüft, ob der Betrag positiv ist und ob
     ausreichend Deckung auf dem Konto vorhanden ist.

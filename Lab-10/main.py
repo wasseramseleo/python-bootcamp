@@ -5,7 +5,7 @@ acc1 = BankAccount("Max Mustermann", "AT123", 100.0)
 acc1.deposit(50.5)
 print(f"Saldo: {acc1.get_balance()}")
 
-accounts_list: list[BankAccount] = [acc1] # Variable auch annotiert
+accounts_list: list[BankAccount] = [acc1]
 found_acc = find_account_by_number(accounts_list, "AT123")
 
 if found_acc:
