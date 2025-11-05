@@ -10,7 +10,7 @@ In diesem Lab erstellen Sie ein "Sicherheitsnetz" (Safety Net) für unsere `Bank
   * Edge Cases (Grenzfälle) effizient mit Parametrisierung (`@pytest.mark.parametrize`) testen.
   * (Bonus) Externe Abhängigkeiten (APIs, Services) durch Mocking (`pytest-mock`) isolieren.
 
-## 🏦 Szenario
+## Szenario
 
 Wir haben unsere `BankAccount`-Klasse (aus früheren Labs) erweitert. Sie verfügt nun über eine rudimentäre Betrugsprüfung (`check_fraud_risk`), die vor einer Abhebung einen (hypothetischen) externen API-Dienst aufruft.
 
@@ -25,13 +25,13 @@ Für dieses Lab benötigen Sie `pytest` und `pytest-mock`:
 `pip install pytest pytest-mock`
 
 **Struktur:**
-Wir testen die Datei `bank_account.py` (unser "System Under Test" oder SUT). Die Tests schreiben wir in eine separate Datei namens `test_bank_account.py`.
+Wir testen die Datei `account.py` (unser "System Under Test" oder SUT). Die Tests schreiben wir in eine separate Datei namens `test_account.py`.
 
 ### Angabe
 
 **Ziel:** Testen Sie die Kernfunktionalität (Erfolg, Fehler, Exceptions) der `BankAccount`-Klasse mithilfe von Fixtures und `pytest.raises`.
 
-**Datei: `test_bank_account.py`**
+**Datei: `test_account.py`**
 
 1.  **Imports:** Importieren Sie `pytest` und die `BankAccount`-Klasse.
 
@@ -78,7 +78,7 @@ Wir testen die Datei `bank_account.py` (unser "System Under Test" oder SUT). Die
 
 **Ziel:** Führen Sie die Tests mithilfe von Parametrisierung (DRY) zusammen und isolieren Sie die externe Betrugsprüfungs-API durch Mocking.
 
-**Datei: `test_bank_account.py`**
+**Datei: `test_account.py`**
 
 1.  **Parametrisierung (`@pytest.mark.parametrize`)**:
 
@@ -90,18 +90,18 @@ Wir testen die Datei `bank_account.py` (unser "System Under Test" oder SUT). Die
 
 2.  **Mocking (Externe Abhängigkeit isolieren)**:
 
-      * Unsere (hypothetische) SUT `bank_account.py` importiert einen Service: `import external_services.fraud_api as fraud_service` und ruft `fraud_service.check_risk(...)` auf.
+      * Unsere (hypothetische) SUT `account.py` importiert einen Service: `import external_services.fraud_api as fraud_service` und ruft `fraud_service.check_risk(...)` auf.
       * **Test 1 (Mocking - Fraud Alert):**
           * Erstellen Sie `test_withdraw_fraud_alert(basic_account, mocker)`. (Die `mocker`-Fixture kommt von `pytest-mock`).
           * **Arrange (Mock):** Patchen Sie den externen Service, sodass er "hohes Risiko" (z.B. `0.9`) zurückgibt.
-            `mocker.patch('bank_account.external_services.fraud_api.check_risk', return_value=0.9)`
+            `mocker.patch('account.external_services.fraud_api.check_risk', return_value=0.9)`
           * **Act/Assert:** Prüfen Sie, ob die `withdraw`-Funktion (die intern `check_risk` aufruft) nun eine `PermissionError` auslöst (wie in der SUT-Logik definiert).
             `with pytest.raises(PermissionError, match="Fraud Alert"):`
             `     basic_account.withdraw(50.0) `
       * **Test 2 (Mocking - Erfolg und Call-Prüfung):**
           * Erstellen Sie `test_withdraw_fraud_check_pass(basic_account, mocker)`.
           * **Arrange (Mock):** Patchen Sie den Service, sodass er "geringes Risiko" (`0.1`) zurückgibt.
-            `mock_api = mocker.patch('bank_account.external_services.fraud_api.check_risk', return_value=0.1)`
+            `mock_api = mocker.patch('account.external_services.fraud_api.check_risk', return_value=0.1)`
           * **Act:** Führen Sie eine normale Abhebung durch: `basic_account.withdraw(50.0)`.
           * **Assert:**
               * `assert basic_account.get_balance() == 50.0` (Der Test ist bestanden).

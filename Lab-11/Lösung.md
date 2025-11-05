@@ -29,7 +29,7 @@ Die Lösung implementiert den **Google Style** für Docstrings. Dieser Stil wird
 
 ```python
 """
-Modul: bank_account
+Modul: account
 
 Dies ist der Modul-Docstring (Bonus-Aufgabe).
 Er enthält die Kerndatenmodelle für die Banking-App, 

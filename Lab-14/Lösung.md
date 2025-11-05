@@ -6,9 +6,9 @@
 
 Die Lösung besteht aus zwei Dateien, die die "Best Practice" der Trennung von Logger-Konfiguration (in der App) und Logger-Nutzung (in der Bibliothek) demonstrieren.
 
-**1. `bank_account.py` (Die Bibliothek)**
+**1. `account.py` (Die Bibliothek)**
 
-  * **Regel 2 (`getLogger(__name__)`):** Diese Datei holt sich nur ihren *eigenen* Logger. `__name__` wird magisch zu `"bank_account"`, sodass wir in den Logs sehen können, woher die Nachricht stammt.
+  * **Regel 2 (`getLogger(__name__)`):** Diese Datei holt sich nur ihren *eigenen* Logger. `__name__` wird magisch zu `"account"`, sodass wir in den Logs sehen können, woher die Nachricht stammt.
   * **Kein `basicConfig`:** Dieses Modul *konfiguriert nichts*. Es verlässt sich darauf, dass die aufrufende App (`main.py`) das Logging einrichtet.
   * **Performance:** Wir verwenden `log.info("Konto %s ...", var1, var2)` statt f-Strings. Das Logging-Framework formatiert den String nur, wenn die Nachricht tatsächlich protokolliert wird (d.h. wenn das Level `INFO` oder niedriger ist). Bei f-Strings (`log.info(f"Konto {var1}...")`) wird der String *immer* zuerst erstellt, auch wenn er (z.B. bei Log-Level `WARNING`) sofort wieder verworfen wird.
   * `calculate_internal_risk_score` wurde absichtlich fehlerhaft implementiert, um einen `ZeroDivisionError` für Regel 3 zu provozieren.
@@ -16,7 +16,7 @@ Die Lösung besteht aus zwei Dateien, die die "Best Practice" der Trennung von L
 **2. `main.py` (Die Anwendung)**
 
   * **Regel 1 (Konfiguration):** Diese Datei (und *nur* diese) konfiguriert das Logging beim Start über `logging.basicConfig`. Sie stellt das Format und das globale Level (hier `DEBUG`) ein.
-  * **Logger-Namen:** Wenn das Skript ausgeführt wird, sehen wir Logs von `__main__` (dem Logger von `main.py`) und von `bank_account` (dem Logger des importierten Moduls).
+  * **Logger-Namen:** Wenn das Skript ausgeführt wird, sehen wir Logs von `__main__` (dem Logger von `main.py`) und von `account` (dem Logger des importierten Moduls).
   * **Regel 3 (Exception Logging):**
       * `log.error(f"Ein Fehler ist aufgetreten: {e}")`: Dies ist **FALSCH**. Die Ausgabe zeigt nur die Fehlermeldung (z.B. "division by zero"), aber nicht *wo* (welche Datei, welche Zeile) der Fehler aufgetreten ist. Der **Stack Trace** fehlt.
       * `log.exception(...)`: Dies ist **KORREKT**. Es protokolliert die Nachricht auf `ERROR`-Level und fügt *automatisch* den vollständigen Stack Trace hinzu. Dies ist für das Debugging unerlässlich.
@@ -31,13 +31,13 @@ Die Lösung besteht aus zwei Dateien, die die "Best Practice" der Trennung von L
 
 ## Python-Code: Angabe
 
-### `bank_account.py` (Modul / Bibliothek)
+### `account.py` (Modul / Bibliothek)
 
 ```python
 import logging
 
 # Regel 2: Logger auf Modulebene holen.
-# __name__ wird hier zu "bank_account"
+# __name__ wird hier zu "account"
 log = logging.getLogger(__name__)
 
 class BankAccount:
@@ -81,7 +81,7 @@ class BankAccount:
 
 ```python
 import logging
-from bank_account import BankAccount # Import des Moduls
+from account import BankAccount # Import des Moduls
 
 # Regel 1: Applikation konfiguriert das Logging EINMALIG
 logging.basicConfig(
@@ -98,7 +98,7 @@ def main():
     
     acc1 = BankAccount("Max Mustermann", "AT123", 500.0)
     
-    # Dieser Aufruf erzeugt ein WARNING-Log aus dem 'bank_account'-Modul
+    # Dieser Aufruf erzeugt ein WARNING-Log aus dem 'account'-Modul
     log.info("Teste absichtlich fehlgeschlagene Abhebung:")
     acc1.withdraw(99999)
 
@@ -129,13 +129,13 @@ if __name__ == "__main__":
 
 ### `main.py` (Anwendung - JSON-Version)
 
-*(Die Datei `bank_account.py` bleibt exakt dieselbe wie in der Angabe.)*
+*(Die Datei `account.py` bleibt exakt dieselbe wie in der Angabe.)*
 
 ```python
 import logging
 import logging.config
 import sys
-from bank_account import BankAccount # Import des Moduls
+from account import BankAccount # Import des Moduls
 
 # Regel 4: Strukturiertes Logging mit dictConfig
 LOGGING_CONFIG = {

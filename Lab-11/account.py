@@ -1,5 +1,5 @@
 """
-Modul: bank_account
+Modul: account
 
 Dies ist der Modul-Docstring.
 Er enthält die Kerndatenmodelle für die Banking-App,

@@ -4,11 +4,11 @@
 
 Dieses Lab besteht aus zwei Dateien: dem "System Under Test" (SUT), das wir testen, und der Test-Datei selbst.
 
-### 1. `bank_account.py` (Das System Under Test - SUT)
+### 1. `account.py` (Das System Under Test - SUT)
 
 Diese Datei enthält unsere `BankAccount`-Klasse, die wir testen wollen. Sie wurde (wie in der Anleitung beschrieben) um eine Abhängigkeit zu einem *hypothetischen* externen Service (`external_services.fraud_api`) erweitert. Wir müssen diesen Service in unseren Tests "mocken" (simulieren).
 
-### 2. `test_bank_account.py` (Der Test-Code)
+### 2. `test_account.py` (Der Test-Code)
 
 #### Angabe
 
@@ -21,12 +21,12 @@ Diese Datei enthält unsere `BankAccount`-Klasse, die wir testen wollen. Sie wur
   * **`@pytest.mark.parametrize` (DRY):** Dieser Dekorator ist die "Don't Repeat Yourself"-Lösung für Tests. Anstatt drei separate Testfunktionen für "Erfolg", "Genau Null" und "Fehler" zu schreiben, definieren wir *eine* Testfunktion (`test_withdraw_parametrized`) und lassen `pytest` sie dreimal mit den verschiedenen Datensätzen ausführen.
   * **Mocking (Isolation):**
       * **`mocker`**: Dies ist eine Fixture von `pytest-mock`, die wir anfordern, um das Patchen (Ersetzen) von Objekten/Methoden zur Laufzeit zu ermöglichen.
-      * **`mocker.patch(...)`**: Dies ist der Kern des Mockings. Wir weisen `pytest` an, den Pfad `'bank_account.external_services.fraud_api.check_risk'` abzufangen.
+      * **`mocker.patch(...)`**: Dies ist der Kern des Mockings. Wir weisen `pytest` an, den Pfad `'account.external_services.fraud_api.check_risk'` abzufangen.
       * **`return_value=0.9`**: Wir simulieren eine API-Antwort. Im Test `test_withdraw_fraud_alert` gibt die API `0.9` (hohes Risiko) zurück. Unsere SUT-Logik fängt dies ab und löst einen `PermissionError` aus, den wir mit `pytest.raises` erwarten.
       * **`return_value=0.1`**: Im Test `test_withdraw_fraud_check_pass` simulieren wir eine "erfolgreiche" API-Antwort (geringes Risiko).
       * **`mock_api.assert_called_once_with(...)`**: Dies ist ein kritischer Test. Wir prüfen nicht nur, ob unser Code *funktioniert* (Saldo ist 50.0), sondern auch, ob er sich *korrekt verhalten* hat – hat er die externe API (den Mock) *genau einmal* und *mit den korrekten Argumenten* (Konto "AT123", Betrag 50.0) aufgerufen?
 
-## Python-Code 1: `bank_account.py` (System Under Test)
+## Python-Code 1: `account.py` (System Under Test)
 
 ```python
 import logging
@@ -107,11 +107,11 @@ class BankAccount:
         return True
 ```
 
-## Python-Code 2: `test_bank_account.py` (Test-Datei)
+## Python-Code 2: `test_account.py` (Test-Datei)
 
 ```python
 import pytest
-from bank_account import BankAccount # Import des SUT
+from account import BankAccount # Import des SUT
 
 # --- Angabe ---
 
@@ -186,7 +186,7 @@ def test_withdraw_fraud_alert(basic_account, mocker):
     """
     # Arrange (Mock): Ersetze den API-Aufruf, return_value=0.9
     mocker.patch(
-        'bank_account.external_services.fraud_api.check_risk',
+        'account.external_services.fraud_api.check_risk',
         return_value=0.9
     )
     
@@ -206,7 +206,7 @@ def test_withdraw_fraud_check_pass(basic_account, mocker):
     """
     # Arrange (Mock): Ersetze den API-Aufruf, return_value=0.1
     mock_api = mocker.patch(
-        'bank_account.external_services.fraud_api.check_risk',
+        'account.external_services.fraud_api.check_risk',
         return_value=0.1
     )
     

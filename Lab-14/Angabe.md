@@ -11,20 +11,20 @@ In diesem Lab ersetzen Sie unzureichende `print()`-Anweisungen durch professione
 
 ## Szenario
 
-Die `BankAccount`-Klasse ist jetzt ein eigenständiges Modul (`bank_account.py`). Unsere Hauptanwendung (`main.py`) importiert und verwendet es.
+Die `BankAccount`-Klasse ist jetzt ein eigenständiges Modul (`account.py`). Unsere Hauptanwendung (`main.py`) importiert und verwendet es.
 
 Aktuell verwendet die `BankAccount`-Klasse `print()`-Anweisungen, um über Fehler (z.B. "Nicht genügend Deckung") zu informieren. Dies ist in einer Produktionsumgebung inakzeptabel. Gleichzeitig fängt `main.py` Exceptions ab, protokolliert sie aber falsch, wodurch wertvolle Stack-Trace-Informationen verloren gehen.
 
 Ihre Aufgabe ist es, ein robustes Logging-System nach "Best Practices" zu implementieren.
 
 
-Dieses Lab erfordert zwei Dateien: `bank_account.py` (die "Bibliothek") und `main.py` (die "Anwendung").
+Dieses Lab erfordert zwei Dateien: `account.py` (die "Bibliothek") und `main.py` (die "Anwendung").
 
 ### Angabe
 
 **Ziel:** Implementieren Sie `getLogger(__name__)` im Modul und `basicConfig` in der App. Demonstrieren Sie das korrekte Loggen von Exceptions.
 
-**1. Datei: `bank_account.py` (Das Modul)**
+**1. Datei: `account.py` (Das Modul)**
 
 1.  Importieren Sie `logging`.
 2.  Holen Sie sich den Modul-Logger: `log = logging.getLogger(__name__)` (ganz oben auf Modulebene).
@@ -35,7 +35,7 @@ Dieses Lab erfordert zwei Dateien: `bank_account.py` (die "Bibliothek") und `mai
 <!-- end list -->
 
 ```python
-# === Kopiervorlage für bank_account.py ===
+# === Kopiervorlage für account.py ===
 # 1. Import logging
 # 2. Logger holen (log = ...)
 
@@ -64,7 +64,7 @@ class BankAccount:
 
 **2. Datei: `main.py` (Die Anwendung)**
 
-1.  Importieren Sie `logging` und die `BankAccount`-Klasse aus `bank_account.py`.
+1.  Importieren Sie `logging` und die `BankAccount`-Klasse aus `account.py`.
 2.  **Konfiguration (Regel 1):** Konfigurieren Sie das Logging *nur hier*. Verwenden Sie `logging.basicConfig(...)`.
       * Setzen Sie `level=logging.DEBUG`.
       * Setzen Sie ein `format` (z.B. `'%(asctime)s - %(name)s - %(levelname)s - %(message)s'`).
