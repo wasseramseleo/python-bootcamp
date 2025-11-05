@@ -34,7 +34,6 @@ print("\n--- 3. Filterung (DEPOSIT > 500) ---")
 mask_deposits = (df_completed['transaction_type'] == 'DEPOSIT')
 mask_high_value = (df_completed['amount'] > 500)
 
-# (Klammern um jede Bedingung sind wichtig!)
 high_value_deposits = df_completed[mask_deposits & mask_high_value]
 print(high_value_deposits)
 
