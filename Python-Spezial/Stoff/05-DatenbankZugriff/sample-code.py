@@ -33,7 +33,7 @@ with engine.connect() as conn:
 
 """--------------4-------------------"""
 # DANGEROUS - DO NOT DO THIS:
-# sql = f"SELECT * FROM birds WHERE ring = '{user_input}'"
+sql = f"SELECT * FROM birds WHERE ring = '{user_input}'"
 
 # SECURE Approach:
 search_ring = "AX-9921'; DROP TABLE birds; --" # Malicious input
@@ -64,7 +64,7 @@ class Bird(Base):
 # Usage
 with Session(engine) as session:
   # Create object instead of writing INSERT SQL
-  new_bird = Bird(species="Blackbird", weight=95.2)
+  new_bird = Bird(species="Amsel", weight=95.2)
   session.add(new_bird)
   session.commit()  # Saves to DB
 

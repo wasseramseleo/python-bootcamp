@@ -24,7 +24,7 @@ with open('capture_data.csv', mode='r', newline='') as csvfile:
 import json
 
 bird_data = {
-    "species": "Ciconia ciconia", # White Stork
+    "species": "Ciconia ciconia", # Weißstorch
     "rings": ["H8812", "GPS-Tracker-09"],
     "measurements": {"bill": 180, "wing": 590}
 }

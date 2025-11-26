@@ -7,7 +7,6 @@ def calculate_condition_index(weight_g: float, wing_len_mm: float) -> float:
     return 0.0
   return weight_g / wing_len_mm
 
-
 # Usage
 index = calculate_condition_index(18.5, 74.0)
 """--------------2-------------------"""

@@ -1,6 +1,6 @@
 """--------------1-------------------"""
 # Basic assignment (Dynamic Typing)
-species_name = "Parus major"  # Great Tit
+species_name = "Parus major"  # Kohlmeise
 wing_length_mm = 74.5
 is_migratory = False
 
@@ -10,18 +10,18 @@ body_mass_g: float = 18.2
 
 """--------------2-------------------"""
 # List: Mutable collection of daily captures
-captured_birds = ["Blue Tit", "Great Tit", "Robin"]
-captured_birds.append("Blackbird")  # List can grow
+captured_birds = ["Blaumeise", "Kohlmeise", "Rotkehlchen"]
+captured_birds.append("Amsel")  # List can grow
 
 # Tuple: Immutable capture site coordinates (Lat, Lon)
 site_coords = (48.2082, 16.3738)
-# site_coords[0] = 49.000  # This would raise a TypeError
+site_coords[0] = 49.000  # TypeError
 
 """--------------3-------------------"""
 # Dictionary representing a single bird's biometric record
 bird_record = {
     "ring_id": "H77-201",
-    "species": "Erithacus rubecula",  # Robin
+    "species": "Erithacus rubecula",  # Rotkehlchen
     "fat_score": 3,
     "wing_length": 72.0
 }

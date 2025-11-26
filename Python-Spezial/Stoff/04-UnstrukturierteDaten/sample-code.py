@@ -19,7 +19,7 @@ doc = Document() # Creates new blank doc
 doc.add_heading('Annual Ringing Report', 0)
 
 # Add a table with data
-data = [('A12', 'Blue Tit'), ('B99', 'Robin')]
+data = [('A12', 'Blaumeise'), ('B99', 'Rotkehlchen')]
 table = doc.add_table(rows=1, cols=2)
 
 # Set header
@@ -46,7 +46,7 @@ raw_text = page.extract_text()
 
 # Basic filtering
 if "Parus major" in raw_text:
-    print("Found mention of Great Tit on page 1")
+    print("Found mention of Kohlmeise on page 1")
 
 """--------------4-------------------"""
 import pdfplumber

@@ -27,7 +27,7 @@ Here are the slides for **Topic 1: Python 13 Grundlagen**, tailored to the Bird 
 
 ```python
 # Basic assignment (Dynamic Typing)
-species_name = "Parus major"  # Great Tit
+species_name = "Parus major"  # Kohlmeise
 wing_length_mm = 74.5
 is_migratory = False
 
@@ -55,8 +55,8 @@ Willkommen zu Python. Wir starten direkt mit der Syntax. Im Gegensatz zu statisc
 
 ```python
 # List: Mutable collection of daily captures
-captured_birds = ["Blue Tit", "Great Tit", "Robin"]
-captured_birds.append("Blackbird")  # List can grow
+captured_birds = ["Blaumeise", "Kohlmeise", "Rotkehlchen"]
+captured_birds.append("Amsel")  # List can grow
 
 # Tuple: Immutable capture site coordinates (Lat, Lon)
 site_coords = (48.2082, 16.3738)
@@ -84,7 +84,7 @@ Hier ist eine kritische Unterscheidung: `Lists` vs. `Tuples`. Nutzen Sie Listen,
 # Dictionary representing a single bird's biometric record
 bird_record = {
     "ring_id": "H77-201",
-    "species": "Erithacus rubecula",  # Robin
+    "species": "Erithacus rubecula",  # Rotkehlchen
     "fat_score": 3,
     "wing_length": 72.0
 }

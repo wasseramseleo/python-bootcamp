@@ -65,7 +65,7 @@ import pandas as pd
 # Data representing a single ringing session
 data = {
     "ring_id": ["AX-01", "AX-02", "AX-03"],
-    "species": ["Robin", "Blackbird", "Robin"],
+    "species": ["Rotkehlchen", "Amsel", "Rotkehlchen"],
     "weight_g": [17.5, 98.2, 18.1]
 }
 
@@ -103,7 +103,7 @@ species_col = df['species']
 heavy_birds = df[df['weight_g'] > 20.0]
 
 # Combine Logic
-robins = df[(df['species'] == 'Robin') & (df['weight_g'] > 18.0)]
+robins = df[(df['species'] == 'Rotkehlchen') & (df['weight_g'] > 18.0)]
 ```
 
 **Speaker Notes (German):**
