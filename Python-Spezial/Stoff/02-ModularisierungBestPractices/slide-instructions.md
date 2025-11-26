@@ -178,7 +178,7 @@ Für die Fortgeschrittenen: Echte Daten sind schmutzig. Vielleicht tippt jemand 
   * **Ziel:** Refactoring des Codes aus Lab 1 in saubere Funktionen.
   * **Aufgabe 1 (Funktionen):** Schreiben Sie eine Funktion `check_migration(weight, species)`, die `True` zurückgibt, wenn das Gewicht über einem Schwellenwert liegt.
   * **Aufgabe 2 (Module):** Lagern Sie diese Funktion in eine Datei `bird_logic.py` aus und importieren Sie sie in `main.py`.
-  * **Aufgabe 3 (Advanced):**
+  * **Aufgabe 3:**
       * Verwenden Sie `try/except` beim Einlesen von Benutzereingaben (`input()`).
       * Strukturieren Sie das Skript mit `if __name__ == "__main__":`.
 

@@ -109,7 +109,7 @@ Hier sehen wir den "Core"-Ansatz. Wir schreiben SQL, wie wir es kennen: `SELECT 
 
 **Body Text (German):**
 
-  * **Gefahr:** SQL Injection ist die häufigste Sicherheitslücke im Web. Bauen Sie SQL-Strings **niemals** mit `f-strings` oder `+` zusammen\!
+  * **Gefahr:** SQL Injection ist die häufigste Sicherheitslücke im Web. Bauen Sie SQL-Strings **niemals** mit `f-strings` oder `+` zusammen!
   * **Lösung:** Nutzen Sie Parameter (`:param_name`). SQLAlchemy und der Treiber kümmern sich um das Escaping von gefährlichen Zeichen.
   * **Best Practice:** Betrachten Sie User-Input (z.B. Suche nach Ringnummer) immer als "untrusted".
 

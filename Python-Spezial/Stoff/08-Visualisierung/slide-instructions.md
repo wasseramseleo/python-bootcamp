@@ -203,7 +203,7 @@ df = pd.read_csv("final_lab_data.csv")
 ```
 
 **Speaker Notes (German):**
-Im finalen Lab visualisieren wir unsere harte Arbeit. Die Einsteiger erstellen die Standard-Plots für die Biometrie und die Artenliste. Die Fortgeschrittenen bauen ein Mini-Dashboard: Ich möchte sehen, wie sich die Fangzahlen an den verschiedenen Standorten über die Zeit entwickeln, nebeneinander dargestellt mittels Faceting. Viel Erfolg\!
+Im finalen Lab visualisieren wir unsere harte Arbeit. Die Einsteiger erstellen die Standard-Plots für die Biometrie und die Artenliste. Die Fortgeschrittenen bauen ein Mini-Dashboard: Ich möchte sehen, wie sich die Fangzahlen an den verschiedenen Standorten über die Zeit entwickeln, nebeneinander dargestellt mittels Faceting. Viel Erfolg!
 
 **Image Prompt:** A split screen showing a Python script on the left and a web browser on the right displaying the generated, interactive Plotly charts organized as a simple dashboard report.
 

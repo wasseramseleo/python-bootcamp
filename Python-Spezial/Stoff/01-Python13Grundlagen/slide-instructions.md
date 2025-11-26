@@ -170,7 +170,7 @@ Diese Slide ist für die Fortgeschrittenen. Statt eines Loops über fünf Zeilen
   * **Szenario:** Wir simulieren die Erfassung von Beringungsdaten.
   * **Aufgabe 1 (Basics):** Erstellen Sie eine Liste von Vögeln (Strings) und ein Dictionary für einen spezifischen Vogel mit Messwerten.
   * **Aufgabe 2 (Logic):** Iterieren Sie über eine Liste von Gewichten und kategorisieren Sie diese (If/Else).
-  * **Aufgabe 3 (Advanced):** Nutzen Sie eine List Comprehension, um eine Liste von Flügel-Längen von `mm` in `cm` umzurechnen. Typisieren Sie Ihre Variablen.
+  * **Aufgabe 3:** Nutzen Sie eine List Comprehension, um eine Liste von Flügel-Längen von `mm` in `cm` umzurechnen. Typisieren Sie Ihre Variablen.
   * **Transfer:** Überlegen Sie beim Coden, wie diese Strukturen (Liste vs. Dict) Ihre echten Geschäftsdaten abbilden würden.
 
 **Code Snippet (Python):**

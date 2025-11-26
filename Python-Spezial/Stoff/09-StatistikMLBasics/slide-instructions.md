@@ -194,7 +194,7 @@ Für die Profis: Rohdaten in ein Modell zu werfen, ist gefährlich. Oft müssen 
   * **Aufgabe 1 (Setup):** Laden Sie den Datensatz. Definieren Sie `X` (Wing Length) und `y` (Weight).
   * **Aufgabe 2 (Split):** Teilen Sie die Daten in 80% Training und 20% Test.
   * **Aufgabe 3 (Modeling):** Trainieren Sie eine `LinearRegression`. Treffen Sie Vorhersagen für das Test-Set.
-  * **Aufgabe 4 (Advanced):**
+  * **Aufgabe 4:**
       * Berechnen Sie RMSE und R². Interpretieren Sie das Ergebnis: Ist das Modell brauchbar?
       * Nutzen Sie `statsmodels`, um zu prüfen, ob der Koeffizient signifikant ist (p \< 0.05).
 

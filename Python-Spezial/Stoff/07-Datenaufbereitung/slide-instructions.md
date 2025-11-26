@@ -164,7 +164,7 @@ weekly_counts = df.set_index('date').resample('W').size()
 ```
 
 **Speaker Notes (German):**
-Für die Experten: Manchmal reicht Standard-Logik nicht. Wenn Sie das Alter eines Vogels basierend auf Mauser-Code *und* Monat bestimmen müssen, schreiben Sie eine Python-Funktion und wenden sie mit `apply` an. Vorsicht bei der Performance\! Im unteren Teil sehen Sie `resample`. Damit können Sie hochfrequente Daten (z.B. jede Beringung) auf Wochen-Summen herunterbrechen – essenziell für Migrations-Trends.
+Für die Experten: Manchmal reicht Standard-Logik nicht. Wenn Sie das Alter eines Vogels basierend auf Mauser-Code *und* Monat bestimmen müssen, schreiben Sie eine Python-Funktion und wenden sie mit `apply` an. Vorsicht bei der Performance! Im unteren Teil sehen Sie `resample`. Damit können Sie hochfrequente Daten (z.B. jede Beringung) auf Wochen-Summen herunterbrechen – essenziell für Migrations-Trends.
 
 **Image Prompt:** A calendar focusing on days, then zooming out to group them into weeks, visualizing the aggregation of time-series data.
 

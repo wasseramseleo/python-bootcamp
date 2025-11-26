@@ -18,5 +18,5 @@
 
 # ACTION:
 
-Generate the two markdown files (Instructions and Solution) for this lab, following all rules from our setup prompt (domain theme, continuity, Core Task + Bonus Challenge, and two-file format).
+Generate the two markdown files (Instructions and Solution) for this lab, following all rules from our setup prompt (domain theme, continuity, Basis Aufgabe + Bonus Herausforderung, and two-file format).
 Dont use emojis in the instructions. The heading for core task is "Angabe" and for bonus challenge its "Bonus-Herausforderung". Also generate a mini flask backend which hosts the necessary endpoints for this exercise

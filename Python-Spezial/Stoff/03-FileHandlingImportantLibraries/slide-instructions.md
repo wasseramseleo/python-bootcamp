@@ -21,7 +21,7 @@ Here are the slides for **Topic 3: File Handling & Wichtige Libraries**, focusin
 
 **Body Text (German):**
 
-  * **Der `open()` Befehl:** Der klassische Weg, um Dateien zu öffnen. Modi: `'r'` (read), `'w'` (write - überschreibt\!), `'a'` (append).
+  * **Der `open()` Befehl:** Der klassische Weg, um Dateien zu öffnen. Modi: `'r'` (read), `'w'` (write - überschreibt!), `'a'` (append).
   * **Der Context Manager (`with`):** **Best Practice.** Er garantiert, dass die Datei automatisch geschlossen wird, selbst wenn Fehler auftreten. Das verhindert Resource Leaks und korrupte Dateien.
   * **Encoding:** Geben Sie immer `encoding='utf-8'` an, um Probleme mit Umlauten oder Sonderzeichen zu vermeiden.
 
