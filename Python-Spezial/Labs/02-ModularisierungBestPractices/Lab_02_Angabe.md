@@ -2,7 +2,7 @@
 
 ### Szenario
 
-Das Skript aus Lab 01 funktioniert, ist aber schwer wiederverwendbar. Andere Abteilungen der PyBank möchten Ihre Währungsumrechnungs-Logik nutzen. Wir müssen den Code refaktorieren, Logik in Funktionen kapseln und Standard-Bibliotheken einbinden.
+Das Skript aus Lab 01 funktioniert, ist aber nicht wiederverwendbar. Andere Abteilungen der PyBank möchten Ihre Umrechnungslogik nutzen. Wir müssen den Code ändern, Logik in Funktionen kapseln und Standard-Bibliotheken einbinden.
 
 ### Voraussetzungen
 

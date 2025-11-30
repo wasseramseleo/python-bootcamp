@@ -102,7 +102,7 @@ from my_package.utils import helper
 ```
 
   * **Pro:** Eindeutig, immer klar, woher der Code kommt.
-  * **Con:** Schwerer zu refaktorieren (wenn `my_package` umbenannt wird).
+  * **Con:** Schwerer zu ändern (wenn `my_package` umbenannt wird).
 
 **Relative Imports (Bevorzugt *innerhalb* eines Packages)**
 Relativ zur aktuellen Datei.

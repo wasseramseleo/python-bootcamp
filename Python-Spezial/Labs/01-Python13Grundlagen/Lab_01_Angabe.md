@@ -2,7 +2,7 @@
 
 ### Szenario
 
-Sie arbeiten im Backend-Team der "PyBank". Ihr System erhält einen rohen Feed von Transaktionen verschiedener Konten (Checking, Savings). Ihre Aufgabe ist es, diese Rohdaten zu normalisieren, Währungen umzurechnen und eine erste Bilanz zu ziehen.
+Sie arbeiten im Backend-Team der "PyBank". Ihr System erhält einen rohen Feed von Transaktionen verschiedener Konten (Giro, Sparen). Ihre Aufgabe ist es, diese Rohdaten zu normalisieren, Währungen umzurechnen und eine erste Bilanz zu ziehen.
 
 ### Voraussetzungen
 
@@ -48,6 +48,6 @@ Ziel ist die Anwendung von modernem, "pythonischem" Code für effizientere Daten
 
 **Anforderungen:**
 
-1.  **Type Hinting:** Kopieren Sie Ihren Code und fügen Sie explizite Type Hints hinzu (z.B. `List[Dict]`, `float`, etc.). Importieren Sie `List`, `Dict`, `Any` aus `typing` (oder nutzen Sie built-in types ab Python 3.9+).
+1.  **Type Hinting:** Fügen Sie ihrem Code explizite Type Hints hinzu (z.B. `List[Dict]`, `float`, etc.). Importieren Sie `List`, `Dict`, `Any` aus `typing` (oder nutzen Sie built-in types ab Python 3.9+).
 2.  **List Comprehension:** Erstellen Sie eine neue Liste `eur_amounts`, die *nur* die Beträge aller Transaktionen enthält, bereits in EUR umgerechnet. Lösen Sie dies in einer **einzigen Zeile** mittels List Comprehension.
 3.  **Generator:** Schreiben Sie eine Generator-Funktion `transaction_id_generator(start_id, count)`, die fortlaufende Transaktions-IDs erzeugt (`yield`). Nutzen Sie diesen Generator, um 5 neue IDs zu simulieren und auf der Konsole auszugeben.

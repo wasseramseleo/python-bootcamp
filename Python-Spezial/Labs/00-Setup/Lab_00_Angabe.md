@@ -17,11 +17,11 @@ Einrichtung eines **Virtual Environments** im Projekt-Root und Installation alle
 
 ### Schritt 2: Environment erstellen
 
-Wählen Sie **einen** der beiden Wege (Standard oder Modern/Schnell).
+Wählen Sie **einen** der drei Wege (Standard, Modern oder Anaconda).
 
-#### Weg A: Standard (pip)
+#### Option A: pip
 
-Nutzen Sie diesen Weg, wenn Sie den klassischen Python-Workflow bevorzugen.
+Nutzen Sie diesen Weg, wenn Sie den klassischen Python-Workflow bevorzugen und Python direkt installiert haben.
 
 1.  **Terminal öffnen:** Öffnen Sie das Terminal in Ihrer IDE.
 2.  **Venv erstellen:**
@@ -34,14 +34,14 @@ Nutzen Sie diesen Weg, wenn Sie den klassischen Python-Workflow bevorzugen.
       * **Mac/Linux:** `source .venv/bin/activate`
         *(Hinweis: In VS Code sollten Sie gefragt werden, ob Sie dieses Environment für den Workspace nutzen wollen. Klicken Sie auf "Ja".)*
 4.  **Installation:**
-    Kopieren Sie diesen Befehl, um alle Pakete für Lab 01-09 zu installieren:
+    Kopieren Sie diesen Befehl, um alle Pakete zu installieren:
     ```bash
     pip install pandas numpy sqlalchemy plotly scikit-learn python-docx pypdf pdfplumber reportlab
     ```
 
-#### Weg B: Modern (uv)
+#### Option B: uv
 
-Nutzen Sie diesen Weg für extrem schnelle Installationen. `uv` ist ein moderner Ersatz für pip/venv, geschrieben in Rust.
+Nutzen Sie diesen Weg für extrem schnelle Installationen. `uv` ist ein moderner Ersatz für pip/venv (geschrieben in Rust) und bereits vorinstalliert.
 
 1.  **Terminal öffnen:** Öffnen Sie das Terminal in Ihrer IDE.
 2.  **Venv erstellen:**
@@ -50,53 +50,39 @@ Nutzen Sie diesen Weg für extrem schnelle Installationen. `uv` ist ein moderner
     ```
 3.  **Aktivieren:**
       * Gleicher Schritt wie oben (Windows: `.venv\Scripts\activate`, Mac: `source .venv/bin/activate`).
-      * *Alternativ können Sie Befehle auch ohne Aktivierung via `uv run` ausführen, aber für die IDE-Integration ist die Aktivierung empfohlen.*
 4.  **Installation:**
     Nutzen Sie `uv pip`, um die Pakete in das erstellte venv zu laden:
     ```bash
     uv pip install pandas numpy sqlalchemy plotly scikit-learn python-docx pypdf pdfplumber reportlab
     ```
 
+#### Option C: Anaconda
+
+Nutzen Sie diesen Weg, wenn Sie die **Anaconda Distribution** oder Miniconda verwalten und bevorzugen.
+
+1.  **Terminal öffnen:** Nutzen Sie den "Anaconda Prompt" (Windows) oder Ihr Terminal (Mac/Linux).
+2.  **Environment erstellen:**
+    Wir erstellen ein neues Environment namens `pybank` mit einer aktuellen Python-Version.
+    ```bash
+    conda create --name pybank python=3.11 -y
+    ```
+3.  **Aktivieren:**
+    ```bash
+    conda activate pybank
+    ```
+4.  **Installation:**
+    Um sicherzustellen, dass wir exakt dieselben Paket-Versionen wie die anderen Teilnehmer nutzen (und um Probleme mit fehlenden Paketen in Conda-Channels zu vermeiden), nutzen wir `pip` innerhalb des Conda-Environments:
+    ```bash
+    pip install pandas numpy sqlalchemy plotly scikit-learn python-docx pypdf pdfplumber reportlab
+    ```
+
 -----
 
-### Schritt 3: Verifikation (Check Script)
+### Schritt 3: Verifikation
 
-Erstellen Sie im Hauptordner eine Datei `check_env.py` mit folgendem Inhalt, um zu testen, ob Python und alle Libraries korrekt geladen werden.
-
-```python
-import sys
-import importlib
-
-# Liste der Module, die wir im Kurs brauchen
-required_modules = [
-    'pandas', 'numpy', 'sqlalchemy', 'plotly', 
-    'sklearn', 'docx', 'pypdf', 'pdfplumber', 'reportlab'
-]
-
-print(f"--- PyBank Environment Check ---")
-print(f"Python Version: {sys.version.split()[0]}")
-print(f"Executable: {sys.executable}")
-print("-" * 30)
-
-all_success = True
-
-for lib in required_modules:
-    try:
-        importlib.import_module(lib)
-        print(f"[OK] {lib:<15} erfolgreich geladen.")
-    except ImportError as e:
-        print(f"[!!] FEHLER: {lib} konnte nicht geladen werden. ({e})")
-        all_success = False
-
-print("-" * 30)
-if all_success:
-    print("SUCCESS: Ihr System ist bereit für den Kurs! 🚀")
-else:
-    print("FAIL: Bitte überprüfen Sie die Installation.")
-```
-
-**Ausführen:**
+Stellen Sie sicher, dass Ihr Environment aktiviert ist (bei Conda sehen Sie `(pybank)` vor der Zeile), und führen Sie das Skript aus:
 
 ```bash
+# Im Ordner /00-Setup
 python check_env.py
 ```
