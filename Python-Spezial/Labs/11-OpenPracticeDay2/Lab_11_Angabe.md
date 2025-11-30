@@ -6,33 +6,6 @@ Sie haben nun Zugriff auf das volle Arsenal der Python Data Science Tools. In di
 
 **Freie Aufgabenwahl.**
 
-### Voraussetzungen
-
-Da wir fortgeschrittene Daten benötigen, führen Sie bitte dieses Setup-Skript aus, um den gemeinsamen Datensatz `portfolio_data.csv` zu generieren:
-
-```python
-import pandas as pd
-import numpy as np
-
-# Setup
-np.random.seed(99)
-dates = pd.date_range(start="2023-01-01", periods=100, freq='D')
-n = 1000
-
-data = {
-    "date": np.random.choice(dates, n),
-    "customer_region": np.random.choice(["EU", "US", "ASIA"], n),
-    "asset_class": np.random.choice(["Stocks", "Bonds", "Cash", "Crypto"], n, p=[0.4, 0.3, 0.2, 0.1]),
-    "amount": np.random.exponential(1000, n).round(2), # Viele kleine, wenige große Beträge
-    "is_fraud": np.random.choice([0, 1], n, p=[0.95, 0.05]) # 5% Betrugsrate
-}
-
-df = pd.DataFrame(data)
-# Sortieren für Zeitreihen-Analysen wichtig
-df = df.sort_values("date")
-df.to_csv("portfolio_data.csv", index=False)
-print("Setup fertig: 'portfolio_data.csv' erstellt.")
-```
 
 -----
 

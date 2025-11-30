@@ -11,21 +11,10 @@ def manage_accounts_raw():
         # 2. Tabelle erstellen
         # IF NOT EXISTS verhindert Fehler beim mehrmaligen Ausführen
         create_sql = text("""
-                          CREATE TABLE IF NOT EXISTS accounts
-                          (
-                              id
-                              INTEGER
-                              PRIMARY
-                              KEY,
-                              owner
-                              TEXT
-                              NOT
-                              NULL,
-                              balance
-                              FLOAT
-                              NOT
-                              NULL
-                          )
+            CREATE TABLE IF NOT EXISTS accounts (
+                id INTEGER PRIMARY KEY,
+                owner TEXT NOT NULL,
+                balance FLOAT NOT NULL)
                           """)
         conn.execute(create_sql)
         conn.commit()  # Wichtig!

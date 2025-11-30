@@ -1,0 +1,4 @@
+--- PYBANK DAILY REPORT ---
+First Transaction Date: 01.10.2023
+Final Balance: 924.01 EUR
+---------------------------

@@ -45,6 +45,8 @@ def analyze_documents():
             print("BONITÄTS-CHECK: Gehaltseingang gefunden ✅")
         else:
             print("BONITÄTS-CHECK: Warnung - Kein Gehalt gefunden ❌")
+    except Exception as e:
+        print(f"Fehler beim Lesen von Word: {e}")
 
 if __name__ == "__main__":
     analyze_documents()
