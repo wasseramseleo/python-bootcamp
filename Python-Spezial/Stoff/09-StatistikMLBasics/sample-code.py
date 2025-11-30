@@ -69,14 +69,3 @@ pipe.fit(X_train, y_train)
 
 # Predict (scales input automatically using train stats)
 pipe.predict(X_test)
-
-"""--------------6-------------------"""
-# Lab Starter Hint
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-
-# X must be 2D dataframe/array
-X = df[['wing_len']]
-y = df['weight']
-
-# X_train, X_test, ... = train_test_split(...)

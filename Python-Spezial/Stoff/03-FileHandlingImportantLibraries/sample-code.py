@@ -55,15 +55,3 @@ pattern = r"[A-Z]{2}-\d{4}"
 
 found_rings = re.findall(pattern, notes)
 # Result: ['AX-9921', 'AX-9922']
-
-"""--------------6-------------------"""
-# Lab Hint: Structure
-data_list = []
-with open('input.csv', 'r') as f_in:
-    # Read data...
-    # Transform data...
-    pass
-
-with open('output.json', 'w') as f_out:
-    # Dump data...
-    pass

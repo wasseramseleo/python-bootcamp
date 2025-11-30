@@ -63,18 +63,3 @@ with pdfplumber.open("data_sheet.pdf") as pdf:
     # Filter out None values or empty rows
     if row and row[0] != "Date":
       print(f"Date: {row[0]}, Count: {row[1]}")
-
-"""--------------5-------------------"""
-# Lab Workflow Hint
-# 1. Read PDF
-import pdfplumber
-data = []
-with pdfplumber.open("source.pdf") as pdf:
-    data = pdf.pages[0].extract_table()
-
-# 2. Write Word
-from docx import Document
-doc = Document()
-# ... loop over data and fill doc.add_table()
-
-

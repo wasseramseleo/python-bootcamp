@@ -53,16 +53,3 @@ print(f"Loop time: {time.time() - start}")
 start = time.time()
 df['bmi'] = df['weight_g'] / df['wing_len']
 print(f"Vector time: {time.time() - start}")
-
-"""--------------5-------------------"""
-# Lab Starter
-import pandas as pd
-import numpy as np
-
-# Load dataset
-df = pd.read_csv("materials/migration_data.csv")
-
-# Hint for Task 3
-# Ensure date column is actually datetime type first!
-df['date'] = pd.to_datetime(df['date'])
-

@@ -55,14 +55,3 @@ df['age_class'] = df.apply(classify_age, axis=1)
 
 # Time Series: Resample daily captures to weekly sums
 weekly_counts = df.set_index('date').resample('W').size()
-
-"""--------------6-------------------"""
-# Lab Starter Hint
-import pandas as pd
-
-df = pd.read_csv("dirty_data.csv")
-geo = pd.read_csv("geo_locations.csv")
-
-# Merge hint
-# merged = pd.merge(df, geo, on='...
-

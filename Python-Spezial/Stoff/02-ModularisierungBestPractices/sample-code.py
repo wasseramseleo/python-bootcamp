@@ -20,7 +20,14 @@ def get_banding_timestamp():
 # Using standard library math
 wing_area = math.pi * (5.2 ** 2)
 """--------------3-------------------"""
-#see sample script
+#sh script
+python -m venv .venv
+
+# 2. Activate environment (Windows)
+.venv\Scripts\activate
+
+# 3. Install package
+pip install pandas
 """--------------4-------------------"""
 import sys
 
@@ -43,15 +50,4 @@ except ValueError as e:
     # Handle the specific error
     print(f"Error reading scale: {e}")
     weight = None
-"""--------------6-------------------"""
-# Lab Structure Hint
-# file: main.py
-import bird_logic
 
-def run_session():
-    try:
-        data = float(input("Enter weight: "))
-        if bird_logic.check_migration(data):
-            print("Ready for migration")
-    except ValueError:
-        print("Please enter numbers only.")

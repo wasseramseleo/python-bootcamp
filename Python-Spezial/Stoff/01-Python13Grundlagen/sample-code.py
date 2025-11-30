@@ -56,10 +56,3 @@ def process_bird(ring: str) -> bool:
     """Validates ring format."""
     return len(ring) == 6
 
-"""---------------6------------------"""
-# Lab Starter Hint
-# Target structure implies: List of Dictionaries
-flock_data = [
-    {"id": "A1", "weight": 18},
-    {"id": "A2", "weight": 19}
-]

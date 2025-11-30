@@ -67,15 +67,3 @@ with Session(engine) as session:
   new_bird = Bird(species="Amsel", weight=95.2)
   session.add(new_bird)
   session.commit()  # Saves to DB
-
-"""--------------6-------------------"""
-# Lab Starter Hint
-from sqlalchemy import create_engine, text
-
-# Connect to the provided lab database
-engine = create_engine("sqlite:///lab_data.db")
-
-# Test connection
-with engine.connect() as conn:
-    print("Database reachable.")
-
