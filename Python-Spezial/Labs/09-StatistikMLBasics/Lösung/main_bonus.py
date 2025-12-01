@@ -48,9 +48,10 @@ y_pred = model.predict(X_test)
 
 r2 = r2_score(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
-
+rmse = mse ** 0.5
 print(f"R² Score: {r2:.4f} (1.0 ist perfekt)")
 print(f"Mean Squared Error: {mse:.2f}")
+print(f"RMSE Error: +/- {rmse:.2f}g")
 
 if r2 > 0.8:
     print(">> Das Modell ist sehr zuverlässig.")

@@ -29,17 +29,6 @@ model.fit(X_train, y_train)
 # Evaluate ONLY on test data
 score = model.score(X_test, y_test)
 
-"""--------------3-------------------"""
-import statsmodels.api as sm
-
-# Add constant (Intercept) manually for statsmodels
-X_with_const = sm.add_constant(X)
-
-# Fit OLS model
-ols_model = sm.OLS(y, X_with_const).fit()
-
-# Print comprehensive statistical summary
-print(ols_model.summary())
 
 """--------------4-------------------"""
 from sklearn.metrics import mean_squared_error, r2_score
