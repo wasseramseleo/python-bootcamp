@@ -1,74 +1,87 @@
 # Lab 08: Datenvisualisierung mit Plotly
 
 ### Szenario
-
-Das Management ist begeistert von Ihren Zahlen, findet reine Tabellen aber ermüdend. Sie sollen ein interaktives Dashboard erstellen, das es den Managern ermöglicht, Umsätze per Mouse-Hover zu inspizieren und in Zeiträume hinein zu zoomen.
+Das Management ist begeistert von Ihren Zahlen, findet reine Tabellen aber ermüdend. Sie sollen ein interaktives Dashboard erstellen. Der Fokus liegt auf der Visualisierung von Zusammenhängen (Scatter), Vergleichen (Bar) und Verteilungen (Histogram/Facet).
 
 ### Voraussetzungen
+* `plotly` und `pandas` installiert.
+* **Daten-Setup:** Da wir saubere Daten brauchen, nutzen Sie bitte dieses Skript, um den DataFrame für die Übung zu generieren:
 
-  * Installation von Plotly:
+```python
+import pandas as pd
+import numpy as np
 
-    ```bash
-    pip install plotly pandas
-    ```
+# Reproduzierbare Daten erzeugen
+np.random.seed(42)
+dates = pd.date_range(start="2024-01-01", periods=100)
 
-  * **Daten-Setup:** Da wir saubere Daten brauchen, nutzen Sie bitte dieses Skript, um den DataFrame für die Übung zu generieren:
+df = pd.DataFrame({
+    "date": np.repeat(dates, 3), # 3 Transaktionen pro Tag
+    "region": np.random.choice(["EU", "US", "ASIA"], 300),
+    "type": np.random.choice(["deposit", "withdrawal", "payment"], 300),
+    "amount": np.random.uniform(10, 500, 300)
+})
 
-    ```python
-    import pandas as pd
-    import numpy as np
+# Withdrawal/Payment negativ machen
+df.loc[df["type"] != "deposit", "amount"] *= -1
 
-    # Reproduzierbare Daten erzeugen
-    np.random.seed(42)
-    dates = pd.date_range(start="2024-01-01", periods=100)
+# Absoluten Betrag für Visualisierungs-Größe hinzufügen
+df["abs_amount"] = df["amount"].abs()
 
-    df = pd.DataFrame({
-        "date": np.repeat(dates, 3), # 3 Transaktionen pro Tag
-        "region": np.random.choice(["EU", "US", "ASIA"], 300),
-        "type": np.random.choice(["deposit", "withdrawal", "payment"], 300),
-        "amount": np.random.uniform(10, 500, 300)
-    })
-
-    # Withdrawal/Payment negativ machen
-    df.loc[df["type"] != "deposit", "amount"] *= -1
-
-    print("Daten geladen. Zeilen:", len(df))
-    ```
+print("Daten geladen. Zeilen:", len(df))
+````
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
-Ziel ist das Erstellen der zwei wichtigsten Chart-Typen im Banking: Entwicklung über Zeit (Line) und Vergleich von Kategorien (Bar).
+Ziel ist die Darstellung von Zusammenhängen und Kategorien, unter Nutzung von Farben und Größen-Dimensionen (wie im Theory-Code Section 2 & 3).
 
 **Anforderungen:**
 
-1.  **Import:** Importieren Sie `plotly.express` als `px`.
-2.  **Balkendiagramm (Bar Chart):**
-      * Aggregieren Sie die Daten: Berechnen Sie die Summe von `amount` pro `region`. (Tipp: `groupby`).
-      * Erstellen Sie ein Balkendiagramm (`px.bar`), das die Regionen auf der X-Achse und die Summen auf der Y-Achse zeigt.
-      * Setzen Sie den Titel auf "Gesamtvolumen pro Region".
-      * Zeigen Sie den Plot mit `.show()` an.
-3.  **Liniendiagramm (Line Chart):**
-      * Erstellen Sie eine kumulative Summe der Beträge über die Zeit (machen Sie dazu eine Kopie des DataFrames, sortieren Sie nach Datum und nutzen Sie `.cumsum()`).
-      * Erstellen Sie ein Liniendiagramm (`px.line`), das den Verlauf des Gesamtkontostands der Bank über die Zeit zeigt.
+1.  **Scatter Plot (Transaktions-Analyse):**
+
+      * Erstellen Sie einen Scatter Plot (`px.scatter`).
+      * **X-Achse:** `date`, **Y-Achse:** `amount`.
+      * **Farbe (`color`):** Unterscheiden Sie die Punkte nach `type`.
+      * **Größe (`size`):** Nutzen Sie die Spalte `abs_amount`, damit größere Transaktionen dickere Punkte erzeugen.
+      * **Hover Data:** Fügen Sie die `region` zum Tooltip hinzu.
+      * Setzen Sie den Titel auf "Transactions Overview".
+
+2.  **Bar Chart (Regionale Verteilung):**
+
+      * Aggregieren Sie die Daten zuerst: Berechnen Sie die **Anzahl** (`count`) der Transaktionen pro `region` (nutzen Sie `value_counts()` oder `groupby`).
+      * Erstellen Sie ein Balkendiagramm (`px.bar`).
+      * **Text-Label:** Lassen Sie den Wert direkt auf/über den Balken anzeigen (Argument `text` oder `text_auto`), wie im "Top Species" Beispiel der Folien.
+      * Stylen Sie die Beschriftung ggf. mit `update_traces`.
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
-Ziel ist die Erstellung eines komplexen "Multidimensionalen Plots" und das Exportieren als Report.
+Ziel ist die Darstellung von Zeitverläufen mit Achsen-Formatierung und komplexen Subplots (Faceting) für den Export.
 
 **Anforderungen:**
 
-1.  **Scatter Plot mit Faceting:**
-      * Wir wollen Zusammenhänge erkennen. Erstellen Sie einen Scatter Plot (`px.scatter`).
-      * **X-Achse:** Datum
-      * **Y-Achse:** Betrag (`amount`)
-      * **Color:** Färben Sie die Punkte basierend auf dem `type` (Einzahlung/Abhebung).
-      * **Facet Column:** Teilen Sie das Diagramm automatisch in drei Nebendiagramme (Subplots) auf, eines für jede `region` (`facet_col="region"`).
-2.  **Layout Anpassung:**
-      * Ändern Sie das Template auf `plotly_dark` für einen modernen Look.
-      * Fügen Sie Range-Slider auf der X-Achse hinzu (`update_xaxes(rangeslider_visible=True)`).
+1.  **Line Chart (Zeitverlauf):**
+
+      * Erstellen Sie einen neuen DataFrame, der die täglichen Transaktionen zählt (`groupby("date")`).
+      * Erstellen Sie ein Liniendiagramm (`px.line`), das die Anzahl der Transaktionen über die Zeit zeigt.
+      * Aktivieren Sie Marker auf der Linie (`markers=True`).
+      * **Formatierung:** Ändern Sie die X-Achse so (`update_xaxes`), dass die Ticks monatlich erscheinen und das Format "Jan", "Feb" etc. haben (siehe Theory Code Section 4).
+
+2.  **Histogramm mit Faceting:**
+
+      * Wir wollen die Verteilung der Beträge (`amount`) sehen.
+      * Erstellen Sie ein Histogramm (`px.histogram`).
+      * Teilen Sie das Bild in separate Grafiken pro Region auf (`facet_col="region"`).
+      * Nutzen Sie das Template `plotly_white`.
+      * Passen Sie die Achsen-Titel global an (`update_layout`).
+
 3.  **Export:**
-      * Speichern Sie die Grafik als `dashboard.html`. Öffnen Sie diese Datei in Ihrem Browser, um zu sehen, dass die Interaktivität erhalten bleibt.
+
+      * Speichern Sie das Histogramm als `banking_report.html`.
+
+<!-- end list -->
+
+````

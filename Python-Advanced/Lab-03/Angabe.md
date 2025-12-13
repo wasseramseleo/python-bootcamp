@@ -19,7 +19,7 @@ Wir werden die `Account`-Klasse aus Lab 1 direkt modifizieren, um diese Logging-
 
 -----
 
-### Teil 1: Die Kernaufgaben
+### Basis Aufgabe
 
 **Voraussetzung:** Sie benötigen Ihre `account.py` aus Lab 1.
 

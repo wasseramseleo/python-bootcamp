@@ -8,7 +8,7 @@ Wir nutzen das Vererbungsprinzip (IS-A-Beziehung), um spezialisierte Konten zu e
 
 2.  **`CheckingAccount` (Bonus):** Diese Klasse *modifiziert* die Basisklasse. Statt nur neue Methoden hinzuzufügen, *überschreibt* (overrides) sie die geerbte `withdraw`-Methode. Python verwendet automatisch die spezifischste Methode, die es finden kann. Wenn `withdraw` auf einem `CheckingAccount`-Objekt aufgerufen wird, findet Python die Implementierung im `CheckingAccount` zuerst und ignoriert die `withdraw`-Methode der `Account`-Basisklasse.
 
-### Teil 1: Lösung der Kernaufgabe
+### Basis Aufgabe
 
 Wir gehen davon aus, dass `account.py` aus Lab 1 im selben Verzeichnis liegt.
 

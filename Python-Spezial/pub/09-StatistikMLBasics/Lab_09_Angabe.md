@@ -40,7 +40,7 @@ Die Risikoabteilung der "PyBank" möchte den Prozess der Kreditvergabe automatis
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist das Training einer **Linearen Regression**.
 
@@ -60,7 +60,7 @@ Ziel ist das Training einer **Linearen Regression**.
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist die Validierung der Modellgüte und die Nutzung professioneller Pipelines.
 

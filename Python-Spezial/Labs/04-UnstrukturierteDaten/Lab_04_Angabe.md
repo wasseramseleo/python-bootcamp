@@ -1,57 +1,52 @@
 # Lab 04: Unstrukturierte Daten (Word & PDF)
 
 ### Szenario
-
-Die Kreditabteilung erhält Anträge als Word-Dokumente und Kontoauszüge von Fremdbanken als PDF. Bisher wurden diese manuell abgetippt. Ihr Ziel ist es, den Namen des Antragstellers aus dem Word-Dokument und die Transaktionstabelle aus dem PDF automatisch zu extrahieren.
+Die Kreditabteilung erhält Anträge als Word-Dokumente und Kontoauszüge von Fremdbanken als PDF. Bisher wurden diese manuell abgetippt. Ihr Ziel ist es, den Namen des Antragstellers aus dem Word-Dokument und die Transaktionstabelle aus dem PDF automatisch zu extrahieren und in einem neuen Report zusammenzufassen.
 
 ### Voraussetzungen
+* Bibliotheken: `python-docx`, `pypdf`, `pdfplumber` (installiert via `pip`).
+* Dateien: `antrag.docx` und `bank_statement.pdf` (werden im Setup-Code erstellt).
 
-1.  **Libraries installieren:** Öffnen Sie Ihr Terminal/Command Prompt und installieren Sie:
+---
 
-    ```bash
-    pip install python-docx pypdf pdfplumber reportlab
-    ```
+### Basis Aufgabe (Text Extraktion)
 
-    *(Hinweis: `reportlab` benötigen wir nur, um das Test-PDF zu erstellen.)*
-
-2.  **Test-Dateien vorhanden:**
-    Stellen Sie sicher, dass die Dateien `antrag.docx` und `bank_statement.pdf` in Ihrem Ordner existieren.
-
-
------
-
-### Teil 1: Basis Aufgabe
-
-Ziel ist das Extrahieren von reinem Text aus beiden Formaten.
+Ziel ist das Extrahieren von Information aus unstrukturiertem Text, analog zur Extraktion der Vogelarten im Theorie-Block.
 
 **Anforderungen:**
 
-1.  **Word lesen:**
-      * Importieren Sie `Document` aus `docx`.
-      * Öffnen Sie `antrag.docx`.
-      * Iterieren Sie über alle Paragraphen (`doc.paragraphs`) und suchen Sie die Zeile, die mit "Antragsteller:" beginnt.
-      * Geben Sie den Namen des Antragstellers auf der Konsole aus (z.B. "Gefundener Name: Max Mustermann").
-2.  **PDF Text lesen:**
-      * Importieren Sie `PdfReader` aus `pypdf`.
-      * Laden Sie `bank_statement.pdf`.
-      * Extrahieren Sie den Text der ersten Seite (`pages[0].extract_text()`).
-      * Prüfen Sie mittels `if`, ob das Wort "Gehalt" im Text vorkommt, und geben Sie eine Erfolgsmeldung aus.
+1.  **Word lesen (Antragsteller finden):**
+    * Importieren Sie `Document` aus `docx`.
+    * Öffnen Sie `antrag.docx`.
+    * Iterieren Sie über alle Paragraphen (`doc.paragraphs`).
+    * Suchen Sie den Paragraphen, der den Text "Antragsteller:" enthält.
+    * Extrahieren und bereinigen Sie den Namen (alles nach dem Doppelpunkt).
 
------
+2.  **PDF lesen (Keywords checken):**
+    * Importieren Sie `PdfReader` aus `pypdf`.
+    * Laden Sie `bank_statement.pdf`.
+    * Extrahieren Sie den Rohtext der ersten Seite.
+    * Prüfen Sie, ob das kritische Keyword "Gehalt" (Salary) im Text vorkommt und geben Sie das Ergebnis auf der Konsole aus.
 
-### Teil 2: Bonus Herausforderung
+---
 
-Ziel ist die tabellarische Extraktion aus PDFs (oft sehr schwierig) und das automatische Schreiben eines Word-Reports.
+### Bonus Herausforderung (Tabellen & Reporting)
+
+Ziel ist die strukturierte Extraktion von Tabellendaten aus PDFs und das Generieren eines formatierten Word-Reports mit Tabelle (wie im "Annual Ringing Report" Beispiel).
 
 **Anforderungen:**
 
 1.  **PDF Tabelle parsen (pdfplumber):**
-      * `pypdf` liefert nur "flachen" Text. Nutzen Sie `import pdfplumber`.
-      * Öffnen Sie das PDF mit `pdfplumber.open(...)`.
-      * Versuchen Sie, den Inhalt zeilenweise zu lesen. Da unser generiertes PDF sehr einfach ist, iterieren Sie über `page.extract_text().split('\n')`.
-      * **Ziel:** Filtern Sie die Zeilen heraus, die ein Datum (Format YYYY-MM-DD) enthalten, und speichern Sie diese in einer Liste von Dictionaries (Keys: Date, Desc, Amount).
+    * Nutzen Sie `pdfplumber`, um die Struktur der PDF-Seite zu lesen.
+    * Verwenden Sie `page.extract_table()` (gibt eine Liste von Listen zurück), wie in den Folien gezeigt.
+    * Iterieren Sie über die Zeilen. Filtern Sie die Header-Zeile ("Date") und leere Zeilen heraus.
+    * Speichern Sie alle Zeilen, die eine "Gutschrift" (Credit) oder "Gehalt" beinhalten, in einer Liste `salary_data`.
+
 2.  **Word Report generieren:**
-      * Erstellen Sie mit `python-docx` ein *neues* Word-Dokument `genehmigung.docx`.
-      * Fügen Sie eine Überschrift "Kreditentscheidung" hinzu.
-      * Fügen Sie einen Satz hinzu: "Basierend auf der Prüfung von [Name aus Teil 1] und dem Gehaltseingang wurde der Kredit genehmigt."
-      * Speichern Sie das Dokument.
+    * Erstellen Sie ein neues `Document`.
+    * Fügen Sie eine Überschrift "Kredit-Prüfbericht" hinzu.
+    * **Tabelle erstellen:** Erstellen Sie eine Word-Tabelle (`add_table`) mit den gefundenen Gehaltsdaten.
+    * Setzen Sie die Header der Tabelle manuell (z.B. "Datum", "Beschreibung", "Betrag").
+    * Befüllen Sie die Tabelle mittels Loop mit den Daten aus Schritt 1.
+    * Speichern Sie das Ergebnis als `report_genehmigung.docx`.
+```

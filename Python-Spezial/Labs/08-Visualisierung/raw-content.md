@@ -55,7 +55,7 @@ Das Management ist begeistert von Ihren Zahlen, findet reine Tabellen aber ermü
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist das Erstellen der zwei wichtigsten Chart-Typen im Banking: Entwicklung über Zeit (Line) und Vergleich von Kategorien (Bar).
 
@@ -73,7 +73,7 @@ Ziel ist das Erstellen der zwei wichtigsten Chart-Typen im Banking: Entwicklung 
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist die Erstellung eines komplexen "Multidimensionalen Plots" und das Exportieren als Report.
 

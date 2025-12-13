@@ -10,7 +10,7 @@ Sie haben Transaktionsdaten, aber diese sind unvollständig und anonym. Zusätzl
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist das Bereinigen von `NaN` Werten und das Zusammenführen von Tabellen (SQL Join).
 
@@ -31,7 +31,7 @@ Ziel ist das Bereinigen von `NaN` Werten und das Zusammenführen von Tabellen (S
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist die Arbeit mit Zeitreihen (Time Series) und Pivot-Tabellen.
 

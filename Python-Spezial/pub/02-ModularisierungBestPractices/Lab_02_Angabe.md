@@ -11,7 +11,7 @@ Das Skript aus Lab 01 funktioniert, ist aber nicht wiederverwendbar. Andere Abte
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist die Kapselung der Logik in wiederverwendbare Funktionen und die Nutzung der Python Standard Library.
 
@@ -41,7 +41,7 @@ transactions = [
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist die Simulation einer echten Projektstruktur und Robustheit gegen Datenfehler (Resilience).
 

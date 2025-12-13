@@ -1,66 +1,71 @@
 # Lab 02: Modularisierung & Best Practices
 
 ### Szenario
-
-Das Skript aus Lab 01 funktioniert, ist aber nicht wiederverwendbar. Andere Abteilungen der PyBank möchten Ihre Umrechnungslogik nutzen. Wir müssen den Code ändern, Logik in Funktionen kapseln und Standard-Bibliotheken einbinden.
+Das Skript aus Lab 01 funktioniert, ist aber "Spaghetti-Code". Andere Abteilungen der PyBank möchten Ihre Umrechnungslogik nutzen. Wir müssen den Code aufräumen, Logik in Funktionen kapseln und robuster machen.
 
 ### Voraussetzungen
+* Lösung aus Lab 01
+* Verständnis von `def`, `return` und `import`
 
-  * Lösung oder Code aus Lab 01
-  * Verständnis von `def`, `return` und `import`
+---
 
------
+### Basis Aufgabe
 
-### Teil 1: Basis Aufgabe
-
-Ziel ist die Kapselung der Logik in wiederverwendbare Funktionen und die Nutzung der Python Standard Library.
+Ziel ist die Kapselung der Logik in wiederverwendbare Funktionen mit klaren Schnittstellen (Type Hints), wie im Theorie-Beispiel `calculate_condition_index`.
 
 **Anforderungen:**
 
 1.  **Funktion `convert_currency`:**
-      * Erstellen Sie eine Funktion, die `amount`, `currency` und optional `rate` (Standardwert 0.90) akzeptiert.
-      * Die Funktion soll den Betrag in EUR zurückgeben. Wenn die Währung bereits "EUR" ist, wird der Betrag unverändert zurückgegeben.
+    * Erstellen Sie eine Funktion, die `amount`, `currency` und optional `rate` (Standardwert 0.90) akzeptiert.
+    * **Type Hints:** Nutzen Sie Type Hints für Parameter und Rückgabewert (z.B. `amount: float` -> `float`).
+    * Die Funktion soll den Betrag in EUR zurückgeben. (Ist die Währung "EUR", wird der Betrag unverändert retourniert).
+
 2.  **Funktion `process_ledger`:**
-      * Erstellen Sie eine Funktion, die eine Liste von Transaktionen akzeptiert.
-      * Integrieren Sie die Logik aus Lab 01 (Loop, if/else für deposit/withdrawal) in diese Funktion.
-      * **Wichtig:** Nutzen Sie innerhalb der Loop Ihre neue `convert_currency` Funktion.
-      * Die Funktion soll den finalen `balance` zurückgeben (kein `print` innerhalb der Funktion!).
-3.  **Standard Library:**
-      * Importieren Sie das Modul `datetime`.
-      * Geben Sie am Ende des Skripts den berechneten Kontostand aus, gefolgt von einem Zeitstempel: `Report generated at: YYYY-MM-DD HH:MM:SS`.
+    * Erstellen Sie eine Funktion, die eine Liste von Transaktionen verarbeitet.
+    * Integrieren Sie die Logik aus Lab 01 (Loop, if/else für deposit/withdrawal).
+    * Nutzen Sie innerhalb der Loop Ihre neue `convert_currency` Funktion.
+    * Die Funktion soll den finalen `balance` zurückgeben.
+
+3.  **Zeitstempel:**
+    * Importieren Sie `datetime` (wie im Theorie-Block gezeigt).
+    * Erstellen Sie eine kleine Hilfsfunktion `get_timestamp()`, die den aktuellen Zeitpunkt als String (ISO Format) zurückgibt.
 
 **Test-Daten:**
-
 ```python
 transactions = [
     {"type": "deposit", "amount": 100.00, "currency": "EUR"},
     {"type": "withdrawal", "amount": 50.00, "currency": "EUR"},
-    {"type": "deposit", "amount": 200.00, "currency": "USD"}, # Sollte umgerechnet werden
+    {"type": "deposit", "amount": 200.00, "currency": "USD"},
 ]
-```
+````
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
-Ziel ist die Simulation einer echten Projektstruktur und Robustheit gegen Datenfehler (Resilience).
+Ziel ist die Absicherung gegen Abstürze bei fehlerhaften Daten und die Definition eines klaren Einstiegspunkts (`Main Guard`).
 
 **Anforderungen:**
 
-1.  **Module Split:** Lagern Sie die Funktionen (`convert_currency`, `process_ledger`) in eine neue Datei namens `banking_core.py` aus.
-2.  **Import:** Erstellen Sie ein `main.py` Skript, das diese Funktionen importiert und ausführt.
-3.  **Error Handling:** Modifizieren Sie die Schleife in `process_ledger`:
-      * Fügen Sie einen `try-except` Block hinzu.
-      * Fangen Sie Fehler ab, falls eine Transaktion unvollständig ist (z.B. fehlender Key "amount" oder "type").
-      * Bei einem Fehler: Geben Sie eine Warnung auf der Konsole aus ("Skipping invalid transaction..."), aber lassen Sie das Programm **nicht abstürzen**.
-4.  **Main Guard:** Schützen Sie den auszuführenden Code in `main.py` mit `if __name__ == "__main__":`.
+1.  **Main Guard:**
 
-**Korrupte Test-Daten für Bonus:**
+      * Verpacken Sie Ihren Ausführungscode (Aufruf der Funktionen, `print` des Ergebnisses) in eine `main()` Funktion.
+      * Nutzen Sie das `if __name__ == "__main__":` Konstrukt am Ende der Datei, um `main()` aufzurufen.
+
+2.  **Error Handling:**
+
+      * Die echte Welt liefert oft "schmutzige" Daten (z.B. Beträge als String mit Tippfehlern).
+      * Erweitern Sie `process_ledger` um einen `try-except` Block innerhalb der Schleife (analog zum `weight`-Beispiel in den Folien).
+      * Versuchen Sie, den `amount` explizit in einen `float` umzuwandeln.
+      * Fangen Sie einen **`ValueError`** ab, falls dies fehlschlägt.
+      * Geben Sie im Fehlerfall eine Meldung aus (`"Error processing transaction..."`) und überspringen Sie diesen Eintrag (addieren Sie nichts zur Balance), aber **lassen Sie das Programm nicht abstürzen**.
+
+**Korrupte Test-Daten für die Bonus Herausforderung:**
 
 ```python
 transactions = [
     {"type": "deposit", "amount": 100.00, "currency": "EUR"},
-    {"type": "payment"}, # FEHLER: Fehlender amount/currency
-    {"type": "withdrawal", "amount": "fünfzig", "currency": "EUR"}, # FEHLER: String statt Float
+    {"type": "withdrawal", "amount": "fünfzig", "currency": "EUR"}, # FEHLER: String statt Zahl
+    {"type": "deposit", "amount": "200.00", "currency": "USD"},    # OK: String, aber konvertierbar
 ]
 ```

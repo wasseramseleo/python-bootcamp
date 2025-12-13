@@ -31,7 +31,7 @@ Das "PyBank" System wird integriert. Anstatt Testdaten im Code zu schreiben, erh
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist das Lesen einer CSV-Datei, das Parsen von Datumsangaben und das Schreiben einer Zusammenfassung in eine Textdatei.
 
@@ -57,7 +57,7 @@ date,type,amount,currency
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist das Verarbeiten komplexer, geschachtelter JSON-Daten und das Extrahieren von Informationen aus Freitext mittels Regular Expressions (`re`).
 

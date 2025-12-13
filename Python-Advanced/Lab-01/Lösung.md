@@ -8,7 +8,7 @@ Die Lösung erstellt eine `Account`-Klasse, die als zentrale Blaupause für Bank
 2.  **Instanz-Methoden:** `deposit` und `withdraw` sind die Kernverhalten. Sie enthalten *Business-Logik* (Validierung), wie z.B. die Prüfung auf positive Beträge und ausreichende Deckung. `get_balance` ist ein typischer Getter für das protected-Attribut.
 3.  **`__str__`:** Diese "Dunder-Methode" (Double Underscore) ist ein Kernaspekt des Operator Overloading. Sie definiert, wie das Objekt als String repräsentiert wird, was für `print()` und Logging unerlässlich ist.
 
-### Teil 1: Lösung der Kernaufgabe
+### Basis Aufgabe
 
 #### Datei: `account.py`
 

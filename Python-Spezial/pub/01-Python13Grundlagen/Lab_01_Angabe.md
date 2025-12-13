@@ -11,7 +11,7 @@ Sie arbeiten im Backend-Team der "PyBank". Ihr System erhält einen rohen Feed v
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist es, eine Liste von Transaktions-Dictionaries zu verarbeiten, Währungen zu konvertieren und den Kontostand zu berechnen.
 
@@ -42,7 +42,7 @@ usd_to_eur_rate = 0.90
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist die Anwendung von modernem, "pythonischem" Code für effizientere Datenverarbeitung.
 

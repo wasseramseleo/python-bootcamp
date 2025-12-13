@@ -20,7 +20,7 @@ Die Kreditabteilung erhält Anträge als Word-Dokumente und Kontoauszüge von Fr
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist das Extrahieren von reinem Text aus beiden Formaten.
 
@@ -39,7 +39,7 @@ Ziel ist das Extrahieren von reinem Text aus beiden Formaten.
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist die tabellarische Extraktion aus PDFs (oft sehr schwierig) und das automatische Schreiben eines Word-Reports.
 

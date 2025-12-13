@@ -55,7 +55,7 @@ Die Datenmengen wachsen. Die IT-Abteilung hat Ihnen einen Extrakt von 100.000 Tr
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist der sichere Umgang mit DataFrames: Laden, Inspektion und Selektion.
 
@@ -74,7 +74,7 @@ Ziel ist der sichere Umgang mit DataFrames: Laden, Inspektion und Selektion.
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist das Verständnis von **Vektorisierung**. Wir vergleichen die Performance einer klassischen Python-Schleife mit Pandas-Operationen.
 

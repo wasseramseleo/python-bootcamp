@@ -33,7 +33,7 @@ CSV-Dateien sind für dauerhafte Bankdaten ungeeignet. Wir migrieren nun auf ein
 
 -----
 
-### Teil 1: Basis Aufgabe
+### Basis Aufgabe
 
 Ziel ist das Herstellen einer Verbindung und das Ausführen von "Raw SQL" über Python.
 
@@ -54,7 +54,7 @@ Ziel ist das Herstellen einer Verbindung und das Ausführen von "Raw SQL" über 
 
 -----
 
-### Teil 2: Bonus Herausforderung
+### Bonus Herausforderung
 
 Ziel ist die Nutzung des ORM (Object Relational Mapper) für objektorientierten Datenbankzugriff und Sicherheits-Best-Practices.
 

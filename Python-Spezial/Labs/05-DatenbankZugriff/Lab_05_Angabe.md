@@ -1,53 +1,56 @@
 # Lab 05: Datenbankzugriff mit SQLAlchemy
 
 ### Szenario
-
-CSV-Dateien sind für dauerhafte Bankdaten ungeeignet. Wir migrieren nun auf eine relationale Datenbank (SQLite für diesen Workshop). Sie sollen eine Tabelle für Konten (`accounts`) anlegen und Transaktionen sicher speichern.
+CSV-Dateien sind für dauerhafte Bankdaten ungeeignet. Wir migrieren nun auf eine relationale Datenbank (SQLite). Ihre Aufgabe ist es, die Basis-Tabellenstruktur zu erstellen und anschließend das moderne ORM (Object Relational Mapper) zu nutzen, um neue Daten objektorientiert zu speichern.
 
 ### Voraussetzungen
+* Installation: `pip install sqlalchemy`
 
-  * Installation von SQLAlchemy:
-    ```bash
-    pip install sqlalchemy
-    ```
-  * *(Optional)* Ein SQLite Viewer Tool, um die Datei `bank.db` später zu inspizieren.
+---
 
------
+### Basis Aufgabe
 
-### Teil 1: Basis Aufgabe
-
-Ziel ist das Herstellen einer Verbindung und das Ausführen von "Raw SQL" über Python.
+Ziel ist der Umgang mit der `Engine` und das **sichere** Ausführen von SQL-Befehlen mittels Parametern (gegen SQL-Injection), wie in Sektion 4 des Theorie-Codes gezeigt.
 
 **Anforderungen:**
 
-1.  **Engine erstellen:**
-      * Importieren Sie `create_engine` und `text` aus `sqlalchemy`.
-      * Erstellen Sie eine Engine für eine lokale Datei: `sqlite:///bank.db`.
-2.  **Verbindung & Setup:**
-      * Öffnen Sie eine Verbindung (`engine.connect()`).
-      * Führen Sie ein SQL-Statement aus, um eine Tabelle `accounts` zu erstellen (Spalten: `id` (INTEGER PK), `owner` (TEXT), `balance` (FLOAT)).
-      * *Hinweis:* Vergessen Sie bei Datenänderungen (CREATE, INSERT) nicht, `connection.commit()` aufzurufen.
-3.  **Daten einfügen:**
-      * Fügen Sie 2-3 Beispiel-Konten per SQL `INSERT` ein.
-4.  **Daten lesen:**
-      * Führen Sie ein `SELECT * FROM accounts` aus.
-      * Iterieren Sie über das Ergebnis und geben Sie den Besitzer und Kontostand aus.
+1.  **Engine & Setup:**
+    * Importieren Sie `create_engine` und `text` aus `sqlalchemy`.
+    * Erstellen Sie eine Engine für die Datei `sqlite:///bank.db`.
+    * Öffnen Sie eine Verbindung (`engine.connect()`).
 
------
+2.  **Tabelle erstellen (DDL):**
+    * Nutzen Sie `conn.execute()` und `text()`, um eine Tabelle `accounts` anzulegen.
+    * Spalten: `id` (INTEGER PRIMARY KEY), `owner` (TEXT), `balance` (FLOAT).
+    * Fügen Sie via SQL (`INSERT`) zwei Test-Konten ein (z.B. "Alice" mit 100.0, "Bob" mit 50.0).
+    * *Wichtig:* Führen Sie `conn.commit()` aus, um die Änderungen zu speichern.
 
-### Teil 2: Bonus Herausforderung
+3.  **Sichere Abfrage (Parameterized Query):**
+    * Dies ist der wichtigste Teil: Schreiben Sie eine `SELECT` Abfrage, die ein Konto anhand des `owner` Namens sucht.
+    * **Verbot:** Nutzen Sie keine f-Strings (`f"WHERE owner = '{name}'"`).
+    * **Gebot:** Nutzen Sie die sichere Syntax aus dem Theorie-Code (`text("... :name")`) und übergeben Sie den Suchbegriff als Dictionary beim `execute` Aufruf.
+    * Geben Sie das Ergebnis auf der Konsole aus.
 
-Ziel ist die Nutzung des ORM (Object Relational Mapper) für objektorientierten Datenbankzugriff und Sicherheits-Best-Practices.
+---
+
+### Bonus Herausforderung
+
+Ziel ist die Nutzung des ORM Modells (SQLAlchemy 2.0 Style) für das Einfügen von Daten, anstatt rohes SQL zu schreiben.
 
 **Anforderungen:**
 
-1.  **ORM Setup:**
-      * Nutzen Sie `declarative_base` (oder `DeclarativeBase` ab v2.0), um eine Basisklasse zu erstellen.
-      * Definieren Sie eine Python-Klasse `Transaction`, die auf eine Tabelle `transactions` mappt.
-      * Spalten: `id` (PK), `amount` (Float), `currency` (String), `purpose` (String).
-2.  **Bulk Insert:**
-      * Erstellen Sie eine Liste von 100 `Transaction`-Objekten (nutzen Sie eine Schleife und Zufallswerte oder Dummy-Daten).
-      * Speichern Sie alle Objekte auf einmal in die Datenbank (`session.add_all(...)` und `commit`).
-3.  **Sicherheit (Parameterized Query):**
-      * Schreiben Sie eine Abfrage, die Transaktionen filtert, wo die Währung "USD" ist.
-      * **Wichtig:** Nutzen Sie keine String-Concatenation (`"WHERE currency = '" + var + "'"`), sondern die sicheren Filter-Methoden des ORM oder Parameter-Binding, um SQL Injection zu verhindern.
+1.  **Model Definition:**
+    * Importieren Sie `DeclarativeBase`, `Mapped`, `mapped_column` und `Session`.
+    * Erstellen Sie eine `Base` Klasse.
+    * Definieren Sie eine Klasse `Transaction`, die auf die Tabelle `transactions` mappt.
+    * Attribute (mit Type Hints):
+        * `id`: `int` (Primary Key)
+        * `amount`: `float`
+        * `purpose`: `str`
+
+2.  **Daten Speichern:**
+    * Nutzen Sie den `Session(engine)` Context Manager.
+    * Erstellen Sie ein neues `Transaction` Objekt (z.B. "Salary", 2500.00).
+    * Fügen Sie es der Session hinzu (`add`) und speichern Sie es (`commit`).
+    * *Hinweis:* SQLAlchemy erstellt die Tabelle `transactions` automatisch, wenn Sie `Base.metadata.create_all(engine)` vor der Session ausführen (oder Sie erstellen sie manuell analog zu Teil 1).
+```
