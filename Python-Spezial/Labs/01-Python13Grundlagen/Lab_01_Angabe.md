@@ -16,7 +16,7 @@ Ziel ist es, eine Liste von Transaktions-Dictionaries zu verarbeiten, Währungen
 **Gegebene Daten:**
 ```python
 transactions = [
-    {"id": 101, "type": "deposit", "amount": 100.00, "currency": "EUR"},
+    {"id": 101, "type": "deposit", "amount": 1500.00, "currency": "EUR"},
     {"id": 102, "type": "withdrawal", "amount": 50.00, "currency": "EUR"},
     {"id": 103, "type": "deposit", "amount": 200.00, "currency": "USD"},
     {"id": 104, "type": "payment", "amount": 25.50, "currency": "EUR"},
@@ -46,21 +46,11 @@ usd_to_eur_rate = 0.90
 Ziel ist die Anwendung kompakterer Syntax für Datenverarbeitung, wie in den Folien zu List Comprehensions und Generatoren gezeigt.
 
 **Anforderungen:**
-
 1.  **List Comprehension:**
-
       * Erstellen Sie eine neue Liste `eur_only_amounts` basierend auf der Liste `processed_amounts` aus Teil 1.
       * Diese neue Liste soll alle Beträge in `int` (Ganzzahlen) umwandeln (analog zum Abrunden der Vogelgewichte in den Folien).
       * Lösen Sie dies in einer einzigen Zeile.
-
-2.  **Generator Expression:**
-
-      * Simulieren Sie eine speichereffiziente Berechnung von Transaktionsgebühren.
-      * Erstellen Sie einen Generator `fee_gen`.
-      * Die Logik: Für jeden Betrag in `processed_amounts` soll 1% Gebühr (`amount * 0.01`) berechnet werden.
-      * Iterieren Sie anschließend über `fee_gen` und geben Sie die Gebühren nacheinander aus.
-
-3.  **Type Hinting:**
+2.  **Type Hinting:**
 
       * Schreiben Sie eine kleine Funktion `check_limit(amount: float) -> bool`.
       * Die Funktion soll `True` zurückgeben, wenn ein Betrag größer als 500.0 ist.

@@ -38,9 +38,9 @@ for weight in daily_weights:
   elif weight < 18.0:
     status = "Underweight"
   else:
-    status = "Normal"
+    continue
 
-  # Logic to log status...
+  print(f"Weight {weight} is {status}")
 
 """---------------5------------------"""
 raw_data = [18.5, 19.2, 17.8, 21.0]

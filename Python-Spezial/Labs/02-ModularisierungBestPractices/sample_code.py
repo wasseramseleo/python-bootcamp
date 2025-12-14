@@ -1,5 +1,5 @@
 """--------------1-------------------"""
-def calculate_condition_index(weight_g: float, wing_len_mm: float) -> float:
+def calculate_condition_index(weight_g: float, wing_len_mm: float = 10.5) -> float:
   """
   Calculates bird body condition index using scaled mass index concept.
   """
