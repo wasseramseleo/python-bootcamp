@@ -1,0 +1,17 @@
+{
+  "batch_id": "BATCH-2023-X99",
+  "transactions": [
+    {
+      "id": 1,
+      "details": "Payment processed ref: TX-998877 sent to merchant."
+    },
+    {
+      "id": 2,
+      "details": "Refund initiated ref: TX-112233 for customer request."
+    },
+    {
+      "id": 3,
+      "details": "Internal transfer without ref ID."
+    }
+  ]
+}
