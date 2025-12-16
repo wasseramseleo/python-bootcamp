@@ -19,7 +19,7 @@ Ziel ist der Umgang mit der `Engine` und das **sichere** Ausführen von SQL-Befe
     * Erstellen Sie eine Engine für die Datei `sqlite:///bank.db`.
     * Öffnen Sie eine Verbindung (`engine.connect()`).
 
-2.  **Tabelle erstellen (DDL):**
+2.  **Tabelle erstellen:**
     * Nutzen Sie `conn.execute()` und `text()`, um eine Tabelle `accounts` anzulegen.
     * Spalten: `id` (INTEGER PRIMARY KEY), `owner` (TEXT), `balance` (FLOAT).
     * Fügen Sie via SQL (`INSERT`) zwei Test-Konten ein (z.B. "Alice" mit 100.0, "Bob" mit 50.0).

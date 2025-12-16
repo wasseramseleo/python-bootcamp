@@ -9,12 +9,7 @@ Session = sessionmaker(bind=engine)
 
 
 class Transaction(Base):
-    __tablename__ = 'transactions'
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    amount: Mapped[float]
-    currency: Mapped[str]
-    purpose: Mapped[str]
+    # TODO: Implement
 
     def __repr__(self):
         return f"<Tx(id={self.id}, amount={self.amount}, cur={self.currency})>"
@@ -38,19 +33,12 @@ for i in range(1, 101):  # 100 Transaktionen
 with Session() as session:
     # 2. Bulk Insert
 
-    session.add_all(new_transactions)
-    session.commit()
+    # TODO: Implement
     print("100 Transaktionen erfolgreich gespeichert.")
 
     # 3. Parameterized Query (Sicherer Zugriff)
     # Hier suchen wir sicher nach einer Währung
-    target_currency = "USD"
-
-    # Modern SQLAlchemy 2.0 Style select
-    stmt = select(Transaction).where(Transaction.currency == target_currency)
-
-    # Ausführen
-    results = session.execute(stmt).scalars().all()
+    #TODO: Implement
 
     print(f"\n--- Gefundene {target_currency} Transaktionen ---")
     print(f"Anzahl: {len(results)}")
