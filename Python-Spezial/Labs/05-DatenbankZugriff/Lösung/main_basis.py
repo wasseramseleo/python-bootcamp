@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, text
 
 # 1. Engine Konfiguration
 # echo=True gibt alle SQL Befehle in der Konsole aus (gut zum Debuggen)
-engine = create_engine("sqlite:///bank.db", echo=True)
+engine = create_engine("sqlite:///bank.db", echo=True, isolation_level="AUTOCOMMIT")
 
 
 
@@ -16,7 +16,6 @@ def manage_accounts_raw():
         # 2. Tabelle erstellen
         # IF NOT EXISTS verhindert Fehler beim mehrmaligen Ausführen
         conn.execute(create_sql)
-        conn.commit()
         # 3. Daten einfügen
         data = [
             {"o": "Alice Corp", "b": 50000.0},
@@ -24,7 +23,6 @@ def manage_accounts_raw():
         ]
 
         conn.execute(insert_sql, data)
-        conn.commit()
         # 4. Daten lesen
         result = conn.execute(select_sql)
 

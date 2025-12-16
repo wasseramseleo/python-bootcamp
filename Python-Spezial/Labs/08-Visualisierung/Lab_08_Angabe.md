@@ -7,29 +7,6 @@ Das Management ist begeistert von Ihren Zahlen, findet reine Tabellen aber ermü
 * `plotly` und `pandas` installiert.
 * **Daten-Setup:** Da wir saubere Daten brauchen, nutzen Sie bitte dieses Skript, um den DataFrame für die Übung zu generieren:
 
-```python
-import pandas as pd
-import numpy as np
-
-# Reproduzierbare Daten erzeugen
-np.random.seed(42)
-dates = pd.date_range(start="2024-01-01", periods=100)
-
-df = pd.DataFrame({
-    "date": np.repeat(dates, 3), # 3 Transaktionen pro Tag
-    "region": np.random.choice(["EU", "US", "ASIA"], 300),
-    "type": np.random.choice(["deposit", "withdrawal", "payment"], 300),
-    "amount": np.random.uniform(10, 500, 300)
-})
-
-# Withdrawal/Payment negativ machen
-df.loc[df["type"] != "deposit", "amount"] *= -1
-
-# Absoluten Betrag für Visualisierungs-Größe hinzufügen
-df["abs_amount"] = df["amount"].abs()
-
-print("Daten geladen. Zeilen:", len(df))
-````
 
 -----
 
